@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">food</string>
+    <string name="empty"> </string>
+
+    <!--Menu-->
+    <string name="menu_profile">Προφιλ</string>
+    <string name="menu_files">Αρχεια</string>
+    <string name="menu_requests">Αιτήσεις</string>
+    <string name="menu_settings">Ρυθμίσεις</string>
+
+    <!--Intro-->
+    <string name="intro_login_txt">Συνδέσου ή δημιούργησε ένα νέο λογαρισμό</string>
+    <string name="intro_login_or">ή</string>
+    <string name="intro_login_btn">Σύνδεση</string>
+    <string name="intro_register_btn">Εγγραφή</string>
+
+    <!--Login-->
+    <string name="login_title">Σύνδεση χρήστη</string>
+    <string name="login_email">email</string>
+    <string name="login_password">password</string>
+    <string name="login_forgot_pass_btn">Ξέχασα τον κωδικό μου</string>
+    <string name="login_resend_email">νέα αποστολή email</string>
+    <string name="login_login_btn">Σύνδεση</string>
+
+    <!--ForgotPass-->
+    <string name="forgot_pass_title">Επαναφορά κωδικού πρόσβασης</string>
+    <string name="forgot_pass_email">email</string>
+    <string name="forgot_pass_reset_btn">Επαναφορά κωδικού</string>
+
+    <!--Register-->
+    <string name="reg_title">Εγγραφή νέου μέλους</string>
+    <string name="reg_fname">όνομα</string>
+    <string name="reg_sname">επώνυμο</string>
+    <string name="reg_email">email</string>
+    <string name="reg_password">password</string>
+    <string name="reg_reg_btn">Εγγραφή</string>
+
+    <!--PinSetup-->
+    <string name="pin_setup_title1">Καθορισμός 4ψήφιου κωδικού PIN</string>
+    <string name="pin_setup_title2">Επιβεβαιώστε το PIN</string>
+    <string name="pin_setup_deference_pins">Τα PIN δε συμφωνούν. Προσπαθήστε ξανά.</string>
+
+    <!--FingerprintSetup-->
+    <string name="fingerprint_setup_title">Δακτυλικό αποτύπωμα</string>
+    <string name="fingerprint_setup_message">Μπορείτε να χρησιμοποιείτε το δακτυλικό σας αποτύπωμα για να συνδέεστε στον λογαριασμό σας e-forologiki αντί να χρησιμοποιείτε PIN.</string>
+    <string name="fingerprint_setup_fingerprint_btn">Δακτυλικό αποτύπωμα</string>
+    <string name="fingerprint_setup_not_now_btn">Όχι τώρα</string>
+
+    <!--Authentication-->
+    <string name="auth_dialog_title">Σκανάρετε το δακτυλικό σας αποτύπωμα</string>
+    <string name="auth_dialog_btn">Άλλοι μέθοδοι</string>
+    <string name="auth_title">Καλώς όρισες</string>
+    <string name="auth_login_with_pin_btn">ΣΥΝΔΕΣΗ ΜΕ PIN</string>
+    <string name="auth_login_with_fingerprint_btn">ΣΥΝΔΕΣΗ ΜΕ ΔΑΚΤΥΛΙΚΟ ΑΠΟΤΥΠΩΜΑ</string>
+    <string name="auth_much_wrong_requests">Έχουν πραγματοποιηθεί πάρα πολλές προσπάθειες.</string>
+    <string name="auth_waiting_for">Περιμένετε για</string>
+    <string name="auth_login_with_password_btn">Σύνδεση με password</string>
+
+    <!--Profile-->
+    <string name="profile_title">Προφίλ</string>
+    <string name="profile_new_request_btn">νέα δήλωση</string>
+
+    <!--DeleteAccount-->
+    <string name="delete_title">Διαγραφή λογαριασμού</string>
+    <string name="delete_why_title">Πείτε μας, για ποιο λόγο διαγράφετε τον λογαριασμό σας;</string>
+    <string name="delete_desc_1">Η εφαρμογή δεν είναι εύχρηστη.</string>
+    <string name="delete_desc_2">Δε νιώθω ασφαλής να μοιράζομαι τα προσωπικά μου δεδομένα.</string>
+    <string name="delete_desc_3">Πιάνει αρκετό χώρο στη συσκευή μου.</string>
+    <string name="delete_desc_4">Δεν εξυπηρετεί τις ανάγκες μου.</string>
+    <string name="delete_desc_5">Δε χρησιμοποιώ την εφαρμογή συχνά.</string>
+    <string name="delete_desc_6">Άλλος λόγος</string>
+    <string name="delete_description">Αναφέρετε τον λόγο</string>
+    <string name="delete_val_pass">Επαληθεύστε τον κωδικό πρόσβασης σας</string>
+    <string name="delete_password">password</string>
+    <string name="delete_del_account_btn">Διαγραφή λογαριασμού</string>
+
+    <!--Settings-->
+    <string name="settings_dialog_title">Αποσύνδεση!</string>
+    <string name="settings_dialog_message">Θέλετε σίγουρα να αποσυνδεθείτε;</string>
+    <string name="settings_dialog_poss_btn">Αποσύνδεση</string>
+    <string name="settings_dialog_neg_btn">Άκυρο</string>
+
+
+    <!-- Errors -->
+    <string name="ERROR_GENERAL">Προέκυψε κάποιο σφάλμα κατά την εκτέλεση της ενέργειας. Προσπαθήστε ξανά αργότερα.</string>
+    <string name="ERROR_NO_INTERNET">Δεν υπάρχει σύνδεση στο ίντερνετ.</string>
+    <string name="ERROR_MEMBER_EXIST">Υπάρχει ήδη χρήστης με αυτό το email.</string>
+    <string name="ERROR_NOT_EMAIL_VALIDATED">Το email δεν έχει επαληθευθεί.</string>
+    <string name="ERROR_NOT_MEMBER_EXIST">Δεν υπάρχει χρήστης με αυτά τα στοιχεία.</string>
+    <string name="ERROR_WRONG_PASSWORD">Λανθασμένος κωδικός πρόσβασης.</string>
+    <string name="ERROR_MEMBER_HAS_DISABLED">Ο λογαρριασμός έχει απενεργοποιηθεί απο τον διαχειριστή.</string>
+    <string name="ERROR_MEMBER_HAS_BLOCKED">Η πρόσβαση στον λογαριασμό έχει μπλοκαριστεί προσωρινά. Προσπαθήστε ξανά αργότερα.</string>
+    <string name="ERROR_TOO_MANY_REQUESTS">Έχουμε αποκλείσει όλα τα αιτήματα από αυτόν τον αριθμό λόγω ασυνήθιστης δραστηριότητας. Προσπαθήστε ξανά αργότερα.</string>
+    <string name="ERROR_INVALID_CREDENTIALS">Μη έγκυρος αριθμός τηλεφώνου.</string>
+    <string name="ERROR_WRONG_OTP_CODE">Ο κωδικός δεν είναι έγκυρος. Στείλτε ξανά τον κωδικό επαλήθευσης sms και βεβαιωθείτε ότι χρησιμοποιείτε τον έγκυρο κωδικό.</string>
+    <string name="ERROR_PHONE_IS_LINKED_WITH_OTHER_ACCOUNT">Αυτός ο αριθμός είναι ήδη συνδεμένος με άλλο λογαριασμό.</string>
+
+    <!-- Error Title -->
+    <string name="ert_WARNING">Προσοχή!</string>
+    <string name="ert_INTERNET">Ίντερνετ!</string>
+    <string name="ert_ERROR">Σφάλμα!</string>
+    <string name="ert_VER_EMAIL">Επαληθεύστε το email σας!</string>
+    <string name="ert_MAX_REQUEST">Πολλές προσπάθειες!</string>
+    <string name="ert_wrong_pin">Εσφαλμένο PIN</string>
+
+    <!-- Error Field -->
+    <string name="error_empty">Συμπληρώστε το πεδίο</string>
+    <string name="error_email">Λανθασμένη μορφή email</string>
+    <string name="error_password">Απο 8 έως 16 χαρακτήρες, τουλάχιστον 1 γράμμα, 1 νούμερο και 1 ειδικό χαρακτήρα (@ # $ % ^ &#38; + =)</string>
+    <string name="error_phone">Λανθασμένη μορφή αριθμού</string>
+    <string name="error_otp">Μη έγκυρος κωδικός. Ο κωδικός πρέπει να έχει 6 ψηφία</string>
+    <string name="error_post_code">Ο Τ.Κ. πρέπει να έχει 5 ψηφία</string>
+    <string name="error_afm_digits">Το ΑΦΜ πρέπει να έχει 9 ψηφία</string>
+    <string name="error_afm">Μη έγκυρο ΑΦΜ</string>
+    <string name="error_amka">Το ΑΜΚΑ πρέπει να έχει 11 ψηφία</string>
+    <string name="error_pin">Το PIN πρέπει να έχει 4 ψηφία</string>
+    <string name="error_year">Το έτος δεν είναι έγκυρο</string>
+    <string name="error_not_same_pass">Οι κωδικοί δε ταιριάζουν</string>
+    <string name="error_not_same_pin">Τα PIN δε ταιριάζουν</string>
+    <string name="error_not_same_email">Τα email δε ταιριάζουν</string>
+    <string name="error_not_valid_time">Μη έγκυρη ώρα</string>
+    <string name="error_not_valid_day">Μη έγκυρη ημερομινία</string>
+
+
+</resources>

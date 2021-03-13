@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/landing_nav_graph"
+    app:startDestination="@id/nav_intro">
+
+    <fragment
+        android:id="@+id/nav_intro"
+        android:name="gr.ppzglou.food.ui.landing.fragments.IntroFragment"
+        android:label="PreLogin"
+        tools:layout="@layout/fragment_intro">
+        <action
+            android:id="@+id/action_nav_intro_to_nav_login"
+            app:destination="@id/nav_login" />
+        <action
+            android:id="@+id/action_nav_intro_to_nav_register"
+            app:destination="@id/nav_register" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="gr.ppzglou.food.ui.landing.fragments.LoginFragment"
+        android:label="SignUp"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_nav_login_to_nav_forgot_pass"
+            app:destination="@id/nav_forgot_pass" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_register"
+        android:name="gr.ppzglou.food.ui.landing.fragments.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_nav_register_to_nav_login"
+            app:destination="@+id/nav_login"
+            app:popUpTo="@id/nav_intro"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_forgot_pass"
+        android:name="gr.ppzglou.food.ui.landing.fragments.ForgotPassFragment"
+        android:label="ForgotPass"
+        tools:layout="@layout/fragment_forgot_pass" />
+
+</navigation>

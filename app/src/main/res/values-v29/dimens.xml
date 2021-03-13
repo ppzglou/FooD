@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Default Margin Values -->
+    <dimen name="margin_octuple_128dp">128dp</dimen>
+    <dimen name="margin_quadruple_64dp">64dp</dimen>
+    <dimen name="margin_double_32dp">32dp</dimen>
+    <dimen name="margin_double_half_24dp">24dp</dimen>
+    <dimen name="margin_default_16dp">16dp</dimen>
+    <dimen name="margin_half_double_12dp">12dp</dimen>
+    <dimen name="margin_half_8dp">8dp</dimen>
+    <dimen name="margin_quarter_4dp">4dp</dimen>
+    <dimen name="margin_eighth_2dp">2dp</dimen>
+
+    <!-- Default Text Sizes -->
+    <dimen name="text_micro_8sp">8sp</dimen>
+    <dimen name="text_mini_10sp">10sp</dimen>
+    <dimen name="text_small_12sp">12sp</dimen>
+    <dimen name="text_default_14sp">14sp</dimen>
+    <dimen name="text_normal_16sp">16sp</dimen>
+    <dimen name="text_medium_18sp">18sp</dimen>
+    <dimen name="text_large_22sp">22sp</dimen>
+    <dimen name="text_xlarge_26sp">26sp</dimen>
+    <dimen name="text_xxlarge_32sp">32sp</dimen>
+
+    <!-- Default Vector Image Sizes -->
+    <dimen name="vector_small_18dp">18sp</dimen>
+
+    <!-- Corners -->
+    <dimen name="radius_large_24dp">24dp</dimen>
+    <dimen name="radius_medium_8dp">8dp</dimen>
+    <dimen name="radius_small_4dp">4dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">150dp</dimen>
+
+    <dimen name="pageMargin">20dp</dimen>
+    <dimen name="offset">30dp</dimen>
+    <dimen name="pageMarginAndOffset">50dp</dimen>
+
+
+</resources>

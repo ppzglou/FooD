@@ -1,0 +1,150 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+
+    //Dagger Hilt
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+
+    //Safe Args
+    id 'androidx.navigation.safeargs.kotlin'
+
+    //Google Services
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "gr.ppzglou.food"
+        minSdkVersion 22
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('keystore/food.keystore')
+            keyAlias 'food'
+            storePassword 'SPiu88*n)&2'
+            keyPassword 'SPiu88*n)&2'
+        }
+        release {
+            storeFile file('keystore/food.keystore')
+            keyAlias 'food'
+            storePassword 'SPiu88*n)&2'
+            keyPassword 'SPiu88*n)&2'
+        }
+    }
+
+    flavorDimensions "status"
+    productFlavors {
+        dev {
+            applicationIdSuffix '.dev'
+            dimension "status"
+            buildConfigField 'String', 'API_BASE_URL', '"https://us-central1-e-forologiki-3b2f3.cloudfunctions.net/widgets/"'
+            buildConfigField 'String', 'PAYPAL_CONFIG', '"AUYuixFHmyeiGOzRxAlPm8zOYGVgK5MOOK7ZD7G3QCmo0broMC1Rw6LqIVa8h3u6-whb2KVs7uB3yEO4"'
+            signingConfig signingConfigs.debug
+        }
+        live {
+            dimension "status"
+            buildConfigField 'String', 'API_BASE_URL', '"https://us-central1-e-forologiki-3b2f3.cloudfunctions.net/widgets/"'
+            buildConfigField 'String', 'PAYPAL_CONFIG', 'AUYuixFHmyeiGOzRxAlPm8zOYGVgK5MOOK7ZD7G3QCmo0broMC1Rw6LqIVa8h3u6-whb2KVs7uB3yEO4"'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //Dagger Hilt
+    def hilt_version = "2.28.3-alpha"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    //Inject ViewModel objects with Hilt
+    def hilt_viewmodel = "1.0.0-alpha02"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodel"
+    kapt "androidx.hilt:hilt-compiler:$hilt_viewmodel"
+
+    //ktx android
+    def fragment_ktx = "1.3.1"
+    implementation "androidx.fragment:fragment-ktx:$fragment_ktx"
+
+    //OkHttp
+    implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+
+    //Retrofit
+    def retrofit = "2.9.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+
+    //Material
+    implementation 'com.google.android.material:material:1.4.0-alpha01'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //FireBase
+    implementation platform('com.google.firebase:firebase-bom:26.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.firebaseui:firebase-ui-firestore:4.1.0'
+
+    //Kotlin Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.2'
+
+    //Error SnackBar
+    implementation "com.tapadoo.android:alerter:6.2.1"
+}
+
+kapt {
+    correctErrorTypes true
+}
