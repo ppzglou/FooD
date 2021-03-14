@@ -141,6 +141,16 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.2'
 
+    //Biometric
+    implementation 'androidx.biometric:biometric:1.1.0'
+
+    //DAO
+    def room_version = "2.2.6"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
+
     //Error SnackBar
     implementation "com.tapadoo.android:alerter:6.2.1"
 }

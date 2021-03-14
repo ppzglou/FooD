@@ -2,7 +2,6 @@ package gr.ppzglou.food.ui.splash
 
 import android.content.Intent
 import android.view.animation.AnimationUtils
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.ppzglou.food.R
 import gr.ppzglou.food.base.BaseActivity
@@ -19,20 +18,17 @@ class SplashActivity :
 
     override fun setupObservers() {
         with(viewModel) {
-            navigateToLoginScreen.observe(this@SplashActivity, Observer{
+            navigateToLoginScreen.observe(this@SplashActivity, {
                 showLoginScreen()
             })
-            navigateToAuthenticationScreen.observe(this@SplashActivity, Observer{
+            navigateToAuthenticationScreen.observe(this@SplashActivity, {
                 viewModel.fetchDaoUserPin()
             })
            /* fetchDaoUserPin.observe(this@SplashActivity, Observer{
                 //showAuthenticationScreen()
             })*/
-            fetchDaoUserPinError.observe(this@SplashActivity, Observer{
+            fetchDaoUserPinError.observe(this@SplashActivity, {
                 showSetupAuthScreen()
-            })
-            connectivityLiveData.observe(this@SplashActivity, Observer{ event ->
-                event.getContentIfNotHandled()?.let(this@SplashActivity::connectivityChange)
             })
         }
     }

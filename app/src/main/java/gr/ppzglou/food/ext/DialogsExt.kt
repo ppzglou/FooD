@@ -2,12 +2,7 @@ package gr.ppzglou.food.ext
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Dialog
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.view.View
-import android.view.Window
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -61,7 +56,7 @@ fun Activity.foodToast(message: String) {
     toast.show()
 }
 
-fun Activity.eForologikiErrorSnackBar(error: Int) {
+fun Activity.foodErrorSnackBar(error: Int) {
     val title = error.setTitle()
     val message = error.getErrorMessage()
     val icon = error.setIcon()

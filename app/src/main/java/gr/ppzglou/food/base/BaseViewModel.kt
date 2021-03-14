@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import gr.ppzglou.food.ext.BaseException
+import gr.ppzglou.food.ext.getErrorCode
 import gr.ppzglou.food.ext.isNetworkConnected
 import gr.ppzglou.food.util.Event
 import gr.ppzglou.food.util.connectivity.ConnectivityLiveData
@@ -34,10 +36,10 @@ abstract class BaseViewModel(
             try {
                 function.invoke()
             } catch (e: Exception) {
-              /*  if (e.message == null)
+                if (e.message == null)
                     _error.value = (e as BaseException).code
                 else
-                    _error.value = e.message?.getErrorCode()!!*/
+                    _error.value = e.message?.getErrorCode()!!
             }
         }
     }
@@ -50,10 +52,10 @@ abstract class BaseViewModel(
             try {
                 function.invoke()
             } catch (e: Exception) {
-               /* if (e.message == null)
+                if (e.message == null)
                     _error.value = (e as BaseException).code
                 else
-                    _error.value = e.message?.getErrorCode()!!*/
+                    _error.value = e.message?.getErrorCode()!!
             }
         }.invokeOnCompletion {
             _load.value = Event(false)
@@ -67,10 +69,10 @@ abstract class BaseViewModel(
             try {
                 function.invoke()
             } catch (e: Exception) {
-               /* if (e.message == null)
+                if (e.message == null)
                     _error.value = (e as BaseException).code
                 else
-                    _error.value = e.message?.getErrorCode()!!*/
+                    _error.value = e.message?.getErrorCode()!!
             }
         }.invokeOnCompletion {
             _loadLogin.value = Event(false)

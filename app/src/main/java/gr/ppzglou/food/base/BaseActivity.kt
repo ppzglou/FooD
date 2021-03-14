@@ -7,11 +7,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.tapadoo.alerter.Alerter
 import gr.ppzglou.food.ERROR_NO_INTERNET
+import gr.ppzglou.food.ERROR_PIN_OF_USER_IS_WRONG
+import gr.ppzglou.food.ERROR_PIN_OF_USER_NOT_EXIST
 import gr.ppzglou.food.R
-import gr.ppzglou.food.ext.getErrorMessage
-import gr.ppzglou.food.ext.hideKeyboard
-import gr.ppzglou.food.ext.setIcon
-import gr.ppzglou.food.ext.setTitle
+import gr.ppzglou.food.ext.*
 import gr.ppzglou.food.util.connectivity.ConnectivityStatus
 
 
@@ -32,9 +31,9 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel>(clazz: Class<V
         binding = getViewBinding()
         setContentView(binding.root)
 
-        viewModel.error.observe(this, Observer{
-           /* if (it != ERROR_PIN_OF_USER_NOT_EXIST && it != ERROR_PIN_OF_USER_IS_WRONG)
-                eForologikiErrorSnackBar(it)*/
+        viewModel.error.observe(this, Observer {
+            if (it != ERROR_PIN_OF_USER_NOT_EXIST && it != ERROR_PIN_OF_USER_IS_WRONG)
+                foodErrorSnackBar(it)
         })
 
         viewModel.load.observe(this, Observer{

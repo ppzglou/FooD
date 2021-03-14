@@ -2,10 +2,13 @@ package gr.ppzglou.food.ui.landing.fragments
 
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-
-import gr.ppzglou.food.ui.landing.LandingViewModel
 import gr.ppzglou.food.base.BaseFragment
 import gr.ppzglou.food.databinding.FragmentRegisterBinding
+import gr.ppzglou.food.ext.foodToast
+import gr.ppzglou.food.ext.isNotEmpty
+import gr.ppzglou.food.ext.isValidEmail
+import gr.ppzglou.food.ext.isValidPassword
+import gr.ppzglou.food.ui.landing.LandingViewModel
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
@@ -22,12 +25,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             }
             regBtn.setOnClickListener {
                 if (validate()) {
-                   /* viewModel.register(
+                    viewModel.register(
                         email.editText?.text.toString(),
                         password.editText?.text.toString(),
                         fname.editText?.text.toString(),
                         sname.editText?.text.toString()
-                    )*/
+                    )
                 }
             }
         }
@@ -35,14 +38,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     }
 
     override fun setupObservers() {
-       /* viewModel.successRegister.observe(viewLifecycleOwner, {
-            activity?.eForologikiToast("ook")
+        viewModel.successRegister.observe(viewLifecycleOwner, {
+            activity?.foodToast("ook")
 
             findNavController().navigate(RegisterFragmentDirections.actionNavRegisterToNavLogin())
         })
         viewModel.successVerEmail.observe(viewLifecycleOwner, {
-            activity?.eForologikiToast("epitixis email")
-        })*/
+            activity?.foodToast("epitixis email")
+        })
     }
 
     override fun setupViews() {
@@ -51,12 +54,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     private fun validate(): Boolean {
         var flag = true
         with(binding) {
-         /*   val name = !fname.isNotEmpty()
+            val name = !fname.isNotEmpty()
             val sname = !sname.isNotEmpty()
             val email = !email.isValidEmail()
             val pass = !password.isValidPassword()
 
-            if (name || sname || email || pass) flag = false*/
+            if (name || sname || email || pass) flag = false
 
             return flag
         }

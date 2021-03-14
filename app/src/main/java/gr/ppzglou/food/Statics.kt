@@ -3,7 +3,6 @@ package gr.ppzglou.food
 const val FOOD_PREFS = "FOOD"
 const val AUTH_UUID = "AUTH_UUID"
 const val AUTH_IS_VERIFIED = "AUTH_IS_VERIFIED"
-const val USER_TOKEN = "USER_TOKEN"
 const val BRAIN_TREE_TOKEN = "BRAIN_TREE_TOKEN"
 
 const val AUTHENTICATION_PIN_TIME = "AUTHENTICATION_PIN_TIME"

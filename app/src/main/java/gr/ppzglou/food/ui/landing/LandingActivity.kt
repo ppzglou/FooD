@@ -2,7 +2,6 @@ package gr.ppzglou.food.ui.landing
 
 import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.ppzglou.food.R
 import gr.ppzglou.food.base.BaseActivity
@@ -18,7 +17,22 @@ class LandingActivity :
     }
 
     override fun setupObservers() {
+        with(viewModel) {
+            connectivityLiveData.observe(this@LandingActivity) { event ->
+                event.getContentIfNotHandled()?.let(this@LandingActivity::connectivityChange)
+            }
 
+            connectivityUI.observe(this@LandingActivity) { event ->
+                event.getContentIfNotHandled()?.let(this@LandingActivity::connectivityChange)
+            }
+
+            load.observe(this@LandingActivity) { event ->
+                event.getContentIfNotHandled()?.let {
+                    binding.progress.isVisible = it
+                }
+            }
+            checkConnectivity()
+        }
     }
 
 

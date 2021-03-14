@@ -1,16 +1,17 @@
 package gr.ppzglou.food.ui.landing.fragments
 
+import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import gr.ppzglou.food.ERROR_NOT_EMAIL_VALIDATED
+import gr.ppzglou.food.ERROR_PIN_OF_USER_NOT_EXIST
 import gr.ppzglou.food.R
-import gr.ppzglou.food.ui.landing.LandingViewModel
 import gr.ppzglou.food.base.BaseFragment
 import gr.ppzglou.food.databinding.FragmentLoginBinding
-import gr.ppzglou.food.ext.foodToast
-import gr.ppzglou.food.ext.hideKeyboard
-import gr.ppzglou.food.ext.safeNavigate
+import gr.ppzglou.food.ext.*
+import gr.ppzglou.food.ui.landing.LandingViewModel
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
@@ -28,12 +29,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
             loginBtn.setOnClickListener {
                 activity.hideKeyboard()
-                /*if (validate()) {
+                if (validate()) {
                     viewModel.login(
                         email.editText?.text.toString(),
                         password.editText?.text.toString()
                     )
-                }*/
+                }
             }
             forgotPass.setOnClickListener {
                 findNavController().safeNavigate(
@@ -42,28 +43,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 )
             }
             resendEmailBtn.setOnClickListener {
-               // viewModel.verificationEmail()
+                viewModel.verificationEmail()
             }
         }
 
     }
 
     override fun setupObservers() {
-       /* viewModel.successLogin.observe(viewLifecycleOwner) {
-            viewModel.fetchDaoUserPin()
-            activity?.foodToast("oook")
+        /* viewModel.successLogin.observe(viewLifecycleOwner) {
+             viewModel.fetchDaoUserPin()
+             activity?.foodToast("oook")
 
-        }
+         }*/
         viewModel.successVerEmail.observe(viewLifecycleOwner) {
             activity?.foodToast("des ta email sou")
             binding.resendEmailBtn.visibility = View.INVISIBLE
         }
-        viewModel.fetchDaoUserPin.observe(viewLifecycleOwner) {
+        /*viewModel.fetchDaoUserPin.observe(viewLifecycleOwner) {
             if (it != null) {
-                startActivity(Intent(activity, DashboardActivity::class.java))
-                activity?.finish()
+                *//*startActivity(Intent(activity, DashboardActivity::class.java))
+                activity?.finish()*//*
             }
-        }
+        }*/
         viewModel.error.observe(viewLifecycleOwner) {
             if (it == ERROR_NOT_EMAIL_VALIDATED) {
                 binding.resendEmailBtn.visibility = View.VISIBLE
@@ -71,8 +72,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         }
         viewModel.fetchDaoUserPinError.observe(viewLifecycleOwner) {
             if (it == ERROR_PIN_OF_USER_NOT_EXIST) {
-                startActivity(Intent(activity, AuthSetupActivity::class.java))
-                activity?.finish()
+                /* startActivity(Intent(activity, AuthSetupActivity::class.java))
+                 activity?.finish()*/
             }
         }
         viewModel.loadLogin.observe(viewLifecycleOwner, { event ->
@@ -92,7 +93,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             if (email || pass) flag = false
 
             return flag
-        }*/
+        }
     }
 
     private fun startAnimLogo() {
