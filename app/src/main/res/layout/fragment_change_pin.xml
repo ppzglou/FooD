@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gr.ppzglou.food.util.CustomConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.dashboard.fragments.settings.ChangePinFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Αλλαγή PIN"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/text_xlarge_26sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        style="@style/ScrollViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title">
+
+        <gr.ppzglou.food.util.CustomConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/pin_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/menu_layout">
+
+                <gr.ppzglou.food.util.CustomConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGrayLight"
+                    android:padding="10dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/pin_btn"
+                        style="@style/SecButton.Black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="Αλλαγή μέσω τρέων PIN"
+                        android:textSize="@dimen/text_medium_18sp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/old_pin"
+                        style="@style/FEditText.Gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="60dp"
+                        android:hint="τρέχων pin"
+                        android:visibility="gone"
+                        app:errorIconDrawable="@null"
+                        app:layout_constraintTop_toBottomOf="@+id/pin_btn"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/TextInputEditTextTheme"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberPassword"
+                            android:maxLength="4" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </gr.ppzglou.food.util.CustomConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/pass_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/pin_layout">
+
+                <gr.ppzglou.food.util.CustomConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGrayLight"
+                    android:padding="10dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/pass_btn"
+                        style="@style/SecButton.Black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="Αλλαγή μέσω password"
+                        android:textSize="@dimen/text_medium_18sp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/pass"
+                        style="@style/FEditText.Gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="30dp"
+                        android:hint="password"
+                        android:visibility="gone"
+                        app:errorIconDrawable="@null"
+                        app:layout_constraintTop_toBottomOf="@+id/pass_btn"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/TextInputEditTextTheme"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:maxLength="16" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </gr.ppzglou.food.util.CustomConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/choice_error_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="gone"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Επιλέξτε μία απο τις δύο μεθόδους αλλαγής PIN"
+                app:layout_constraintBottom_toTopOf="@id/new_pin_layout" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/new_pin_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/pass_layout">
+
+                <gr.ppzglou.food.util.CustomConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGrayLight"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/set_new_pin_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Εισάγετε το νέο PIN"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_medium_18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@id/radios_layout" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/new_pin"
+                        style="@style/FEditText.Gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="60dp"
+                        android:hint="νέο pin"
+                        app:errorIconDrawable="@null"
+                        app:layout_constraintTop_toBottomOf="@+id/set_new_pin_tv"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/TextInputEditTextTheme"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberPassword"
+                            android:maxLength="4" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ver_new_pin"
+                        style="@style/FEditText.Gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="60dp"
+                        android:hint="επαλύθεσυη pin"
+                        app:errorIconDrawable="@null"
+                        app:layout_constraintTop_toBottomOf="@+id/new_pin"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/TextInputEditTextTheme"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberPassword"
+                            android:maxLength="4" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </gr.ppzglou.food.util.CustomConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/change_pin_btn"
+                style="@style/FButton.Dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="50dp"
+                android:text="Αλλαγή PIN"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_pin_layout"
+                app:layout_constraintVertical_bias="0.29000002" />
+        </gr.ppzglou.food.util.CustomConstraintLayout>
+
+    </ScrollView>
+
+</gr.ppzglou.food.util.CustomConstraintLayout>

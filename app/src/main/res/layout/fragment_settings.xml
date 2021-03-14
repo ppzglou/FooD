@@ -6,29 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.fragments.settings.SettingsFragment">
 
-    <ImageView
+    <TextView
         android:id="@+id/title"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@mipmap/logo"
-        app:layout_constraintDimensionRatio="4:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5"
-        app:tint="@color/colorPrimary" />
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@mipmap/logo"
-        android:visibility="gone"
-        app:layout_constraintDimensionRatio="2:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_xlarge_26sp"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
@@ -37,7 +22,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo">
+        app:layout_constraintTop_toBottomOf="@+id/title">
 
         <ScrollView
             style="@style/ScrollViewStyle"
@@ -63,19 +48,11 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/about"
-                            style="@style/MenuButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableStart="@mipmap/logo"
-                            android:text="About us" />
-
-                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/quick_setup"
                             style="@style/MenuButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@mipmap/logo"
+                            android:drawableStart="@drawable/ic_quick_setup"
                             android:text="Quick Setup" />
 
                         <androidx.appcompat.widget.AppCompatButton
@@ -83,7 +60,7 @@
                             style="@style/MenuButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@mipmap/logo"
+                            android:drawableStart="@drawable/ic_profile"
                             android:text="Αλλαγή προσωπικών στοιχείων" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -123,7 +100,7 @@
                                 style="@style/MenuButton"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:drawableStart="@mipmap/logo"
+                                android:drawableStart="@drawable/ic_baseline_fingerprint_24"
                                 android:enabled="false"
                                 android:text="Σύνδεση με βιομετρικά στοιχεία"
                                 app:layout_constraintEnd_toStartOf="@+id/fingerprint_switch"
@@ -147,8 +124,8 @@
                             style="@style/MenuButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@mipmap/logo"
-                            android:text="Αλλαγή στοιχείων πρόσβασης" />
+                            android:drawableStart="@drawable/ic_access"
+                            android:text="Αλλαγή δεδομένων πρόσβασης" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -178,7 +155,7 @@
                         style="@style/MenuButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@mipmap/logo"
+                        android:drawableStart="@drawable/ic_theme"
                         android:text="Θέμα" />
 
                 </androidx.cardview.widget.CardView>
@@ -205,7 +182,7 @@
                             style="@style/MenuButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@mipmap/logo"
+                            android:drawableStart="@drawable/ic_logout"
                             android:text="Αποσύνδεση" />
 
                         <androidx.appcompat.widget.AppCompatButton
@@ -213,7 +190,7 @@
                             style="@style/MenuButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@mipmap/logo"
+                            android:drawableStart="@drawable/ic_delete"
                             android:text="Διαγραφή λογαριασμού" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

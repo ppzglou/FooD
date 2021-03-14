@@ -3,9 +3,7 @@ package gr.ppzglou.food.ui.dashboard
 import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import gr.ppzglou.food.R
 import gr.ppzglou.food.base.BaseActivity
@@ -44,28 +42,7 @@ class DashboardActivity :
     }
 
     override fun setupViews() {
-        navController = findNavController(R.id.nav_host_fragment)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        binding.navView.setupWithNavController(navController)
 
-        binding.navView.elevation = 0f
-        binding.navView.setOnNavigationItemReselectedListener {}
-
-        val menuList = mutableListOf(
-            R.id.nav_profile,
-            R.id.nav_settings
-        )
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            var isOnMenu = false
-
-            for (id in menuList) if (id == destination.id) {
-                isOnMenu = true
-                break
-            }
-            binding.navView.isVisible = isOnMenu
-
-        }
 
         val anim = AnimationUtils.loadAnimation(this, R.anim.rotate_anim)
         binding.loader.startAnimation(anim)

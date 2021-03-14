@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gr.ppzglou.food.util.CustomConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.dashboard.fragments.settings.ChangePassFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Αλλαγή password"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/text_xlarge_26sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        style="@style/ScrollViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintVertical_bias="0.0">
+
+        <gr.ppzglou.food.util.CustomConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/old_pass_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/menu_layout">
+
+                <gr.ppzglou.food.util.CustomConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGrayLight"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/set_old_pass_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Επαληθεύστε τον τρέχων σας κωδικό πρόσαβσης"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_normal_16sp"
+                        app:layout_constraintTop_toBottomOf="@id/radios_layout" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/old_password"
+                        style="@style/FEditText.Gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="30dp"
+                        android:hint="τρέχων password"
+                        app:errorIconDrawable="@null"
+                        app:layout_constraintTop_toBottomOf="@+id/set_old_pass_tv"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/TextInputEditTextTheme"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:maxLength="16" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </gr.ppzglou.food.util.CustomConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/new_pass_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="1dp"
+                app:layout_constraintTop_toBottomOf="@+id/old_pass_layout">
+
+                <gr.ppzglou.food.util.CustomConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGrayLight"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/set_new_pass_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Εισάγετε έναν νέο κωδικό πρόσβασης"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_normal_16sp"
+                        app:layout_constraintTop_toBottomOf="@id/radios_layout" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/new_password"
+                        style="@style/FEditText.Gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="30dp"
+                        android:hint="νέο password"
+                        app:errorIconDrawable="@null"
+                        app:layout_constraintTop_toBottomOf="@+id/set_new_pass_tv"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/TextInputEditTextTheme"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:maxLength="16" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ver_new_password"
+                        style="@style/FEditText.Gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="30dp"
+                        android:hint="επαλήθεσυη"
+                        app:errorIconDrawable="@null"
+                        app:layout_constraintTop_toBottomOf="@+id/new_password"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            style="@style/TextInputEditTextTheme"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:maxLength="16" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </gr.ppzglou.food.util.CustomConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/change_pass_btn"
+                style="@style/FButton.Dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="50dp"
+                android:text="Αλλαγή κωδικού"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_pass_layout"
+                app:layout_constraintVertical_bias="0.29000002" />
+
+        </gr.ppzglou.food.util.CustomConstraintLayout>
+
+    </ScrollView>
+
+</gr.ppzglou.food.util.CustomConstraintLayout>

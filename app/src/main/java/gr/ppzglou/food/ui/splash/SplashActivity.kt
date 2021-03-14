@@ -6,7 +6,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.ppzglou.food.R
 import gr.ppzglou.food.base.BaseActivity
 import gr.ppzglou.food.databinding.ActivitySplashBinding
-import gr.ppzglou.food.ui.landing.LandingActivity
+import gr.ppzglou.food.ui.dashboard.DashboardActivity
 
 @AndroidEntryPoint
 class SplashActivity :
@@ -56,7 +56,7 @@ class SplashActivity :
     }
 
     private fun showLoginScreen() {
-        val intent = Intent(this, LandingActivity::class.java)
+        val intent = Intent(this, DashboardActivity::class.java)
         startActivity(intent)
         finish()
     }

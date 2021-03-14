@@ -153,6 +153,7 @@ dependencies {
 
     //Error SnackBar
     implementation "com.tapadoo.android:alerter:6.2.1"
+
 }
 
 kapt {
