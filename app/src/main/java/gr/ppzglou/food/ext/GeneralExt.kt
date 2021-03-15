@@ -22,6 +22,12 @@ fun Activity.openKeyboard() {
     imm?.showSoftInput(currentFocus, InputMethodManager.SHOW_IMPLICIT)
 }
 
+fun ImageView.setPic(url: String) {
+    Glide.with(context)
+        .load(url)
+        .into(this)
+}
+
 fun ImageView.setPic(drawable: Int) {
     Glide.with(context)
         .load(ContextCompat.getDrawable(this.context, drawable))

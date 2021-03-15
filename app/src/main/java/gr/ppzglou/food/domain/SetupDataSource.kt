@@ -2,10 +2,17 @@ package gr.ppzglou.food.domain
 
 
 import gr.ppzglou.food.data.models.*
+import gr.ppzglou.food.framework.Recipe
+import gr.ppzglou.food.framework.SearchRequest
+import gr.ppzglou.food.framework.SearchResponse
 import gr.ppzglou.food.util.ResultWrapper
 
 
 interface SetupDataSource {
+
+    suspend fun searchRecipe(request: SearchRequest): ResultWrapper<SearchResponse>
+
+    suspend fun recipe(request: String): ResultWrapper<MutableList<Recipe>>
 
     suspend fun currentUser(): ResultWrapper<CurrentUserResponse>
 

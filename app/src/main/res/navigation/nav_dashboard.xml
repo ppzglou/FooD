@@ -30,6 +30,29 @@
         <action
             android:id="@+id/action_nav_settings_to_nav_personal_settings"
             app:destination="@id/nav_personal_details_settings" />
+        <action
+            android:id="@+id/action_nav_settings_to_nav_search"
+            app:destination="@id/nav_search" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_search"
+        android:name="gr.ppzglou.food.ui.dashboard.fragments.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_nav_search_to_nav_recipe"
+            app:destination="@id/nav_recipe" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_recipe"
+        android:name="gr.ppzglou.food.ui.dashboard.fragments.RecipeFragment"
+        android:label="Recipe"
+        tools:layout="@layout/fragment_recipe">
+        <argument
+            android:name="recipeUri"
+            app:argType="string" />
     </fragment>
 
     <fragment

@@ -7,7 +7,7 @@
     android:layout_margin="5dp"
     app:cardBackgroundColor="@color/colorGrayLight"
     app:rippleColor="@color/colorPrimary"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="@dimen/app_corner_radius">
 
     <gr.ppzglou.food.util.CustomConstraintLayout
         android:layout_width="match_parent"

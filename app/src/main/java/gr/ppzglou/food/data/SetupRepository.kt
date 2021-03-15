@@ -1,10 +1,17 @@
 package gr.ppzglou.food.data
 
 import gr.ppzglou.food.data.models.*
+import gr.ppzglou.food.framework.Recipe
+import gr.ppzglou.food.framework.SearchRequest
+import gr.ppzglou.food.framework.SearchResponse
 import gr.ppzglou.food.util.ResultWrapper
 
 
 interface SetupRepository {
+
+    suspend fun searchRecipeRemote(request: SearchRequest): ResultWrapper<SearchResponse>
+
+    suspend fun recipeRemote(request: String): ResultWrapper<MutableList<Recipe>>
 
     suspend fun currentUserRemote(): ResultWrapper<CurrentUserResponse>
 

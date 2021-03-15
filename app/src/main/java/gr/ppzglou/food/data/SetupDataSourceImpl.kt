@@ -2,12 +2,21 @@ package gr.ppzglou.food.data
 
 import gr.ppzglou.food.data.models.*
 import gr.ppzglou.food.domain.SetupDataSource
+import gr.ppzglou.food.framework.Recipe
+import gr.ppzglou.food.framework.SearchRequest
+import gr.ppzglou.food.framework.SearchResponse
 import gr.ppzglou.food.util.ResultWrapper
 
 
 class SetupDataSourceImpl(
     private val repository: SetupRepository
 ) : SetupDataSource {
+
+    override suspend fun searchRecipe(request: SearchRequest): ResultWrapper<SearchResponse> =
+        repository.searchRecipeRemote(request)
+
+    override suspend fun recipe(request: String): ResultWrapper<MutableList<Recipe>> =
+        repository.recipeRemote(request)
 
     override suspend fun currentUser() =
         repository.currentUserRemote()

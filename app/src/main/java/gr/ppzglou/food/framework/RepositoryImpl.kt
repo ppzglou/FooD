@@ -11,6 +11,8 @@ import gr.ppzglou.food.ERROR_NOT_EMAIL_VALIDATED
 import gr.ppzglou.food.data.SetupRepository
 import gr.ppzglou.food.data.models.*
 import gr.ppzglou.food.ext.BaseException
+import gr.ppzglou.food.ext.handleApiFormat
+import gr.ppzglou.food.ext.networkCall
 import gr.ppzglou.food.util.ResultWrapper
 import kotlinx.coroutines.tasks.await
 
@@ -19,22 +21,22 @@ class RepositoryImpl(
     private val firebaseAuth: FirebaseAuth,
     private val fireStoreDB: FirebaseFirestore,
     private val storage: StorageReference,
-    private val phoneAuthOptionsBuilder: PhoneAuthOptions.Builder
+    private val phoneAuthOptionsBuilder: PhoneAuthOptions.Builder,
+    private val edamamApi: EdamamApi
 ) : SetupRepository {
 
     private val USERS = "users"
-    private val DELETED_USERS = "deleted_users"
-    private val DATA = "data"
-    private val MESSAGES = "messages"
-    private val PERSONAL = "personal"
-    private val ADDRESS = "address"
-    private val AM_CODES = "amCodes"
-    private val TAXIS = "taxis"
-    private val INCOME = "income"
-    private val MEMBERS = "members"
-    private val FILES = "files"
-    private val MORE_INFO = "moreInfo"
 
+    override suspend fun searchRecipeRemote(request: SearchRequest): ResultWrapper<SearchResponse> =
+        networkCall {
+            edamamApi.getSearchResult(request.txt, request.from, request.to).execute()
+                .handleApiFormat()
+        }
+
+    override suspend fun recipeRemote(request: String): ResultWrapper<MutableList<Recipe>> =
+        networkCall {
+            edamamApi.getRecipeResult(request).execute().handleApiFormat()
+        }
 
     override suspend fun currentUserRemote(): ResultWrapper<CurrentUserResponse> {
         val user = firebaseAuth.currentUser ?: throw BaseException(ERROR_GENERAL)
@@ -89,11 +91,11 @@ class RepositoryImpl(
         val user = firebaseAuth.currentUser ?: throw BaseException(ERROR_GENERAL)
 
         val personalHash: MutableMap<String, Any> = HashMap()
-        personalHash["name"] = request.fname + " " + request.sname
+        personalHash["birth"] = ""
+        personalHash["kg"] = ""
+        personalHash["photo"] = ""
 
-        val userData = fireStoreDB.collection(USERS).document(user.uid).collection(DATA)
-
-        userData.document(PERSONAL).set(personalHash).await()
+        fireStoreDB.collection(USERS).document(user.uid).set(personalHash).await()
 
         return ResultWrapper.Success(true)
     }

@@ -25,11 +25,11 @@ class ChangePassFragment : BaseFragment<FragmentChangePassBinding>() {
     override fun setupListeners() {
         with(binding) {
             changePassBtn.setOnClickListener {
-                /* if (validate())
+                 if (validate())
                      viewModel.updatePass(
                          oldPassword.editText?.text.toString(),
                          newPassword.editText?.text.toString()
-                     )*/
+                     )
             }
         }
     }

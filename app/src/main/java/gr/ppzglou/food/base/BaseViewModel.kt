@@ -25,6 +25,9 @@ abstract class BaseViewModel(
     private val _loadLogin = MutableLiveData<Event<Boolean>>()
     val loadLogin: LiveData<Event<Boolean>> = _loadLogin
 
+    private val _loadSearch = MutableLiveData<Event<Boolean>>()
+    val loadSearch: LiveData<Event<Boolean>> = _loadSearch
+
     val _error = MutableLiveData<Int>()
     val error: LiveData<Int> = _error
 
@@ -76,6 +79,23 @@ abstract class BaseViewModel(
             }
         }.invokeOnCompletion {
             _loadLogin.value = Event(false)
+        }
+    }
+
+    fun launchSearch(delayTime: Int = 0, function: suspend () -> Unit) {
+        viewModelScope.launch {
+            _loadSearch.value = Event(true)
+            delay(delayTime.toLong())
+            try {
+                function.invoke()
+            } catch (e: Exception) {
+                if (e.message == null)
+                    _error.value = (e as BaseException).code
+                else
+                    _error.value = e.message?.getErrorCode()!!
+            }
+        }.invokeOnCompletion {
+            _loadSearch.value = Event(false)
         }
     }
 

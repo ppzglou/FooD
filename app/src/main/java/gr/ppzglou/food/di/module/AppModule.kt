@@ -1,4 +1,4 @@
-package gr.ppzglou.food.module
+package gr.ppzglou.food.di.module
 
 import android.app.Application
 import android.content.Context

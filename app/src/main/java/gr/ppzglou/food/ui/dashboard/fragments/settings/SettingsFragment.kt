@@ -51,6 +51,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
                 )
             }
             quickSetup.setOnClickListener {
+                findNavController().safeNavigate(
+                    SettingsFragmentDirections.actionNavSettingsToNavSearch(),
+                    R.id.nav_settings
+                )
                 /*  val intent = Intent(context, StepperActivity::class.java)
                   startActivity(intent)*/
             }

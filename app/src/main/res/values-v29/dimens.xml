@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="app_corner_radius">20dp</dimen>
+
     <!-- Default Margin Values -->
     <dimen name="margin_octuple_128dp">128dp</dimen>
     <dimen name="margin_quadruple_64dp">64dp</dimen>
