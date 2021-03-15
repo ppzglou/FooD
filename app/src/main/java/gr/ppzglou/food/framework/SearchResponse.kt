@@ -16,6 +16,7 @@ data class Recipe(
     @SerializedName("label") val label: String?,
     @SerializedName("image") val image: String?,
     @SerializedName("url") val url: String?,
+    @SerializedName("shareAs") val shareAs: String?,
     @SerializedName("yield") val yield: Int?,
     @SerializedName("dietLabels") val dietLabels: MutableList<String>?,
     @SerializedName("healthLabels") val healthLabels: MutableList<String>?,
@@ -34,3 +35,4 @@ data class Ingredients(
     @SerializedName("foodId") val foodId: String?,
     @SerializedName("image") val image: String?
 )
+

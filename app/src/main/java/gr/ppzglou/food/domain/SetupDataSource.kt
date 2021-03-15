@@ -40,4 +40,6 @@ interface SetupDataSource {
 
     suspend fun getPhone(): ResultWrapper<String?>
 
+    suspend fun userProfile(): ResultWrapper<UserProfileResponse>
+
 }

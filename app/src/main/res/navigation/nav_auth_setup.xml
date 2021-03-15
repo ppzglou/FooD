@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_setup_nav_graph"
+    app:startDestination="@id/nav_pin">
+
+    <fragment
+        android:id="@+id/nav_pin"
+        android:name="gr.ppzglou.food.ui.authsetup.fragments.PinSetupFragment"
+        android:label="PinSetup"
+        tools:layout="@layout/fragment_pin_setup">
+        <action
+            android:id="@+id/action_nav_pin_to_nav_fingerprint"
+            app:destination="@id/nav_fingerprint" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_fingerprint"
+        android:name="gr.ppzglou.food.ui.authsetup.fragments.FingerprintSetupFragment"
+        android:label="FingerprintSetup"
+        tools:layout="@layout/fragment_fingerprint_setup" />
+</navigation>

@@ -17,18 +17,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), ProfileAdapter.O
     override fun getViewBinding(): FragmentProfileBinding =
         FragmentProfileBinding.inflate(layoutInflater)
 
-
-    override fun setupListeners() {
-
-    }
-
     override fun setupObservers() {
-
+        viewModel.successProfile.observe(viewLifecycleOwner) {
+            with(binding) {
+                name.text = it.name
+                email.text = it.email
+                phone.text = it.phone
+            }
+        }
     }
 
     override fun setupViews() {
         profileAdapter.submitList(viewModel.getMenu())
         binding.recyclerView.adapter = profileAdapter
+        viewModel.profile()
+    }
+
+    override fun setupListeners() {
     }
 
     override fun onMenuItemClick(nav: NavDirections) {

@@ -153,4 +153,13 @@
         <item name="android:textColor">@drawable/selector_text_black_to_primary_light</item>
     </style>
 
+    <style name="FButtonKeyboard">
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:elevation">0dp</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/text_xlarge_26sp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
 </resources>

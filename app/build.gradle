@@ -80,6 +80,8 @@ android {
     repositories {
         google()
         jcenter()
+        //countDown timer
+        maven { url 'https://dl.bintray.com/samanjafaridotir/easyCountDownTimerTextview' }
     }
 }
 
@@ -155,6 +157,9 @@ dependencies {
 
     //Error SnackBar
     implementation "com.tapadoo.android:alerter:6.2.1"
+
+    //countDown timer
+    implementation 'ir.samanjafari.easycountdowntimer:easycountdowntimer:2.5.0'
 
 }
 

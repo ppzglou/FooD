@@ -7,12 +7,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.ppzglou.food.AUTH_IS_VERIFIED
 import gr.ppzglou.food.AUTH_UUID
+import gr.ppzglou.food.ERROR_PIN_OF_USER_NOT_EXIST
 import gr.ppzglou.food.base.BaseViewModel
+import gr.ppzglou.food.dao.UserPinDaoImpl
+import gr.ppzglou.food.dao.UserPinEntity
 import gr.ppzglou.food.data.models.*
+import gr.ppzglou.food.ext.isNullOrEmptyOrBlank
 import gr.ppzglou.food.usecases.*
 import gr.ppzglou.food.util.ResultWrapper
 import gr.ppzglou.food.util.SingleLiveEvent
 import gr.ppzglou.food.util.connectivity.ConnectivityLiveData
+import gr.ppzglou.food.util.get
 import gr.ppzglou.food.util.set
 
 class LandingViewModel
@@ -26,10 +31,14 @@ constructor(
     private val verificationEmailUseCase: VerificationEmailUseCase,
     private val updateDisplayNameUseCase: UpdateDisplayNameUseCase,
     private val addUserFireStoreUserUseCase: AddUserFireStoreUserUseCase,
-    private val resetPasswordUseCase: ResetPasswordUseCase
+    private val resetPasswordUseCase: ResetPasswordUseCase,
+    private val userPinDaoImpl: UserPinDaoImpl
 
 ) : BaseViewModel(connectivityLiveData, connectivityManager) {
     private val DELAY = 10
+
+    private val currentUser: String?
+        get() = sharedPrefs[AUTH_UUID, ""]
 
     private val _successLogin = SingleLiveEvent<Boolean>()
     val successLogin: LiveData<Boolean> = _successLogin
@@ -43,12 +52,15 @@ constructor(
     private val _successResetPass = SingleLiveEvent<Boolean>()
     val successResetPass: LiveData<Boolean> = _successResetPass
 
+    private val _fetchDaoUserPin = MutableLiveData<UserPinEntity>()
+    val fetchDaoUserPin: LiveData<UserPinEntity> = _fetchDaoUserPin
+
     private val _fetchDaoUserPinError = MutableLiveData<Int>()
     val fetchDaoUserPinError: LiveData<Int> = _fetchDaoUserPinError
 
 
     fun login(email: String, password: String) {
-        launch(200) {
+        launchLogin(200) {
             when (val response = loginUseCase(LoginRequest(email, password))) {
                 is ResultWrapper.Success -> {
                     sharedPrefs[AUTH_UUID] = response.data.uuid
@@ -114,6 +126,24 @@ constructor(
             when (val response = resetPasswordUseCase(ResetPasswordRequest(email))) {
                 is ResultWrapper.Success -> {
                     _successResetPass.value = response.data
+                }
+            }
+        }
+    }
+
+    fun fetchDaoUserPin() {
+        launch {
+            if (!currentUser.isNullOrEmptyOrBlank) {
+                val users = userPinDaoImpl.getAll()
+
+                for (u in users) {
+                    if (u.uid == currentUser) {
+                        _fetchDaoUserPin.value = u
+                        break
+                    }
+                }
+                if (_fetchDaoUserPin.value == null) {
+                    _fetchDaoUserPinError.value = ERROR_PIN_OF_USER_NOT_EXIST
                 }
             }
         }

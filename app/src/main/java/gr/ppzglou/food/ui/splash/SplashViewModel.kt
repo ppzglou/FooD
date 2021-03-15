@@ -6,7 +6,12 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.ppzglou.food.AUTH_IS_VERIFIED
+import gr.ppzglou.food.AUTH_UUID
+import gr.ppzglou.food.ERROR_PIN_OF_USER_NOT_EXIST
 import gr.ppzglou.food.base.BaseViewModel
+import gr.ppzglou.food.dao.UserPinDaoImpl
+import gr.ppzglou.food.dao.UserPinEntity
+import gr.ppzglou.food.ext.isNullOrEmptyOrBlank
 import gr.ppzglou.food.util.connectivity.ConnectivityLiveData
 import gr.ppzglou.food.util.get
 
@@ -14,15 +19,15 @@ class SplashViewModel @ViewModelInject constructor(
     connectivityLiveData: ConnectivityLiveData,
     connectivityManager: ConnectivityManager,
     private val sharedPrefs: SharedPreferences,
-   // private val userPinDaoImpl: UserPinDaoImpl
+    private val userPinDaoImpl: UserPinDaoImpl
 ) : BaseViewModel(connectivityLiveData, connectivityManager) {
 
     companion object {
         private const val SPLASH_DELAY = 1000
     }
 
-  /*  private val currentUser: String?
-        get() = sharedPrefs[AUTH_UUID, ""]*/
+    private val currentUser: String?
+        get() = sharedPrefs[AUTH_UUID, ""]
 
     private val _navigateToLoginScreen = MutableLiveData<Unit>()
     val navigateToLoginScreen: LiveData<Unit> = _navigateToLoginScreen
@@ -30,15 +35,15 @@ class SplashViewModel @ViewModelInject constructor(
     private val _navigateToDashboardScreen = MutableLiveData<Unit>()
     val navigateToAuthenticationScreen: LiveData<Unit> = _navigateToDashboardScreen
 
-    /*private val _fetchDaoUserPin = MutableLiveData<UserPinEntity>()
-    val fetchDaoUserPin: LiveData<UserPinEntity> = _fetchDaoUserPin*/
+    private val _fetchDaoUserPin = MutableLiveData<UserPinEntity>()
+    val fetchDaoUserPin: LiveData<UserPinEntity> = _fetchDaoUserPin
 
     private val _fetchDaoUserPinError = MutableLiveData<Int>()
     val fetchDaoUserPinError: LiveData<Int> = _fetchDaoUserPinError
 
     fun checkUserExistence() {
         launch(SPLASH_DELAY) {
-            var isCleanInstallation = true //currentUser.isNullOrEmptyOrBlank
+            var isCleanInstallation = currentUser.isNullOrEmptyOrBlank
             if (!isCleanInstallation) {
                 val isVerified = sharedPrefs[AUTH_IS_VERIFIED, ""].toBoolean()
                 isCleanInstallation = !isVerified
@@ -54,7 +59,7 @@ class SplashViewModel @ViewModelInject constructor(
 
     fun fetchDaoUserPin() {
         launch {
-           /* if (!currentUser.isNullOrEmptyOrBlank) {
+            if (!currentUser.isNullOrEmptyOrBlank) {
                 val users = userPinDaoImpl.getAll()
 
                 for (u in users) {
@@ -66,7 +71,7 @@ class SplashViewModel @ViewModelInject constructor(
                 if (_fetchDaoUserPin.value == null) {
                     _fetchDaoUserPinError.value = ERROR_PIN_OF_USER_NOT_EXIST
                 }
-            }*/
+            }
         }
     }
 }

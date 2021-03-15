@@ -39,4 +39,6 @@ interface SetupRepository {
 
     suspend fun getPhoneRemote(): ResultWrapper<String?>
 
+    suspend fun userProfileRemote(): ResultWrapper<UserProfileResponse>
+
 }

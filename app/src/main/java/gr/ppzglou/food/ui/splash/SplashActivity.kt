@@ -6,7 +6,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.ppzglou.food.R
 import gr.ppzglou.food.base.BaseActivity
 import gr.ppzglou.food.databinding.ActivitySplashBinding
-import gr.ppzglou.food.ui.dashboard.DashboardActivity
+import gr.ppzglou.food.ui.authentication.AuthenticationActivity
+import gr.ppzglou.food.ui.authsetup.AuthSetupActivity
+import gr.ppzglou.food.ui.landing.LandingActivity
 
 @AndroidEntryPoint
 class SplashActivity :
@@ -24,9 +26,9 @@ class SplashActivity :
             navigateToAuthenticationScreen.observe(this@SplashActivity, {
                 viewModel.fetchDaoUserPin()
             })
-           /* fetchDaoUserPin.observe(this@SplashActivity, Observer{
-                //showAuthenticationScreen()
-            })*/
+            fetchDaoUserPin.observe(this@SplashActivity, {
+                showAuthenticationScreen()
+            })
             fetchDaoUserPinError.observe(this@SplashActivity, {
                 showSetupAuthScreen()
             })
@@ -56,21 +58,21 @@ class SplashActivity :
     }
 
     private fun showLoginScreen() {
-        val intent = Intent(this, DashboardActivity::class.java)
+        val intent = Intent(this, LandingActivity::class.java)
         startActivity(intent)
         finish()
     }
 
     private fun showAuthenticationScreen() {
-        /*val intent = Intent(this, AuthenticationActivity::class.java)
+        val intent = Intent(this, AuthenticationActivity::class.java)
         startActivity(intent)
-        finish()*/
+        finish()
     }
 
     private fun showSetupAuthScreen() {
-       /* val intent = Intent(this, AuthSetupActivity::class.java)
+        val intent = Intent(this, AuthSetupActivity::class.java)
         startActivity(intent)
-        finish()*/
+        finish()
     }
 
     override fun setupListeners() {}

@@ -165,4 +165,15 @@ class RepositoryImpl(
         return ResultWrapper.Success(phone)
     }
 
+    override suspend fun userProfileRemote(): ResultWrapper<UserProfileResponse> {
+        firebaseAuth.currentUser?.uid ?: throw BaseException(ERROR_GENERAL)
+
+        val userProfile = UserProfileResponse(
+            name = firebaseAuth.currentUser?.displayName,
+            email = firebaseAuth.currentUser?.email,
+            phone = firebaseAuth.currentUser?.phoneNumber
+        )
+        return ResultWrapper.Success(userProfile)
+    }
+
 }

@@ -12,15 +12,15 @@ import gr.ppzglou.food.util.PROFILE_DIFF_UTIL
 
 class ProfileAdapter(
     private val listener: OnItemClickListener
-) : ListAdapter<MenuButton, ProfileAdapter.PointStatesViewHolder>(PROFILE_DIFF_UTIL) {
+) : ListAdapter<MenuButton, ProfileAdapter.ViewHolder>(PROFILE_DIFF_UTIL) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PointStatesViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemViewBinding = ItemProfileBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return PointStatesViewHolder(itemViewBinding).apply {
+        return ViewHolder(itemViewBinding).apply {
             itemViewBinding.root.setOnClickListener {
                 currentList[adapterPosition].direction?.let { it1 -> listener.onMenuItemClick(it1) }
             }
@@ -28,11 +28,11 @@ class ProfileAdapter(
     }
 
 
-    override fun onBindViewHolder(holder: PointStatesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         return holder.bind(getItem(position))
     }
 
-    inner class PointStatesViewHolder(private val itemViewBinding: ItemProfileBinding) :
+    inner class ViewHolder(private val itemViewBinding: ItemProfileBinding) :
         RecyclerView.ViewHolder(itemViewBinding.root) {
 
         fun bind(btn: MenuButton) {

@@ -44,7 +44,7 @@
         android:layout_marginStart="10dp"
         android:ellipsize="end"
         android:maxLines="3"
-        android:text="Συμεών Παπάζογλου"
+        tools:text="Συμεών Παπάζογλου"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/text_large_22sp"
         android:textStyle="bold"
@@ -83,25 +83,16 @@
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="pms97pms@gmail.com"
+                    tools:text="akakaka@gmail.com"
                     android:textAlignment="center"
                     android:textColor="@color/colorWhite" />
 
                 <TextView
-                    android:id="@+id/birth"
+                    android:id="@+id/phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="19-04-1997"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorWhite" />
-
-                <TextView
-                    android:id="@+id/kg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="85kg"
+                    tools:text="6977777777"
                     android:textAlignment="center"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>

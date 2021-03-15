@@ -9,17 +9,14 @@ import gr.ppzglou.food.AUTH_IS_VERIFIED
 import gr.ppzglou.food.AUTH_UUID
 import gr.ppzglou.food.R
 import gr.ppzglou.food.base.BaseViewModel
-import gr.ppzglou.food.data.models.LogoutUserUseCase
 import gr.ppzglou.food.data.models.UpdateEmailRequest
 import gr.ppzglou.food.data.models.UpdatePassRequest
+import gr.ppzglou.food.data.models.UserProfileResponse
 import gr.ppzglou.food.framework.Hits
 import gr.ppzglou.food.framework.Recipe
 import gr.ppzglou.food.framework.SearchRequest
 import gr.ppzglou.food.ui.dashboard.fragments.profile.ProfileFragmentDirections
-import gr.ppzglou.food.usecases.RecipeUseCase
-import gr.ppzglou.food.usecases.SearchUseCase
-import gr.ppzglou.food.usecases.UpdateEmailUseCase
-import gr.ppzglou.food.usecases.UpdatePassUseCase
+import gr.ppzglou.food.usecases.*
 import gr.ppzglou.food.util.MenuButton
 import gr.ppzglou.food.util.ResultWrapper
 import gr.ppzglou.food.util.SingleLiveEvent
@@ -33,6 +30,7 @@ constructor(
     connectivityManager: ConnectivityManager,
     private val sharedPrefs: SharedPreferences,
     private val logoutUserUseCase: LogoutUserUseCase,
+    private val profileUseCase: ProfileUseCase,
     private val updateEmailUseCase: UpdateEmailUseCase,
     private val searchUseCase: SearchUseCase,
     private val recipeUseCase: RecipeUseCase,
@@ -44,6 +42,9 @@ constructor(
     private var from = 0
     private var to = 10
     private var research = true
+
+    private val _successProfile = MutableLiveData<UserProfileResponse>()
+    val successProfile: LiveData<UserProfileResponse> = _successProfile
 
     private val _successSearch = MutableLiveData<MutableList<Hits>>()
     val successSearch: LiveData<MutableList<Hits>> = _successSearch
@@ -74,7 +75,7 @@ constructor(
             MenuButton(
                 "settings",
                 R.drawable.ic_recipe,
-                nav.actionNavProfileToNavSettings()
+                nav.actionNavProfileToNavSearch()
             ),
             MenuButton(
                 "settings",
@@ -82,6 +83,16 @@ constructor(
                 nav.actionNavProfileToNavSettings()
             )
         )
+    }
+
+    fun profile() {
+        launchSearch(DELAY) {
+            when (val response = profileUseCase()) {
+                is ResultWrapper.Success -> {
+                    _successProfile.value = response.data
+                }
+            }
+        }
     }
 
     fun search(txt: String) {

@@ -57,4 +57,7 @@ class SetupDataSourceImpl(
     override suspend fun getPhone(): ResultWrapper<String?> =
         repository.getPhoneRemote()
 
+    override suspend fun userProfile(): ResultWrapper<UserProfileResponse> =
+        repository.userProfileRemote()
+
 }

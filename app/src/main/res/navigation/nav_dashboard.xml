@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_nav_profile_to_nav_settings"
             app:destination="@id/nav_settings" />
+        <action
+            android:id="@+id/action_nav_profile_to_nav_search"
+            app:destination="@id/nav_search" />
     </fragment>
 
     <fragment
@@ -30,9 +33,6 @@
         <action
             android:id="@+id/action_nav_settings_to_nav_personal_settings"
             app:destination="@id/nav_personal_details_settings" />
-        <action
-            android:id="@+id/action_nav_settings_to_nav_search"
-            app:destination="@id/nav_search" />
     </fragment>
 
     <fragment
