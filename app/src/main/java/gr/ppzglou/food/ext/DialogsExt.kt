@@ -2,7 +2,12 @@ package gr.ppzglou.food.ext
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.View
+import android.view.Window
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -12,7 +17,7 @@ import com.tapadoo.alerter.Alerter
 import gr.ppzglou.food.*
 
 
-/*fun Dialog.createPopUpDialog(
+fun Dialog.createPopUpDialog(
     mTitle: String,
     mDescription: String,
     mPosButton: String,
@@ -37,7 +42,7 @@ import gr.ppzglou.food.*
     posButton.setOnClickListener(l)
     negButton.setOnClickListener { this.dismiss() }
     this.show()
-}*/
+}
 
 @SuppressLint("ResourceType")
 fun Activity.foodToast(message: String) {

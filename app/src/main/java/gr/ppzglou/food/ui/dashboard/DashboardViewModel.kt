@@ -5,23 +5,21 @@ import android.net.ConnectivityManager
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import gr.ppzglou.food.AUTH_IS_VERIFIED
-import gr.ppzglou.food.AUTH_UUID
-import gr.ppzglou.food.R
+import gr.ppzglou.food.*
 import gr.ppzglou.food.base.BaseViewModel
+import gr.ppzglou.food.dao.UserPinDaoImpl
+import gr.ppzglou.food.dao.UserPinEntity
 import gr.ppzglou.food.data.models.UpdateEmailRequest
 import gr.ppzglou.food.data.models.UpdatePassRequest
 import gr.ppzglou.food.data.models.UserProfileResponse
+import gr.ppzglou.food.ext.isNullOrEmptyOrBlank
 import gr.ppzglou.food.framework.Hits
 import gr.ppzglou.food.framework.Recipe
 import gr.ppzglou.food.framework.SearchRequest
 import gr.ppzglou.food.ui.dashboard.fragments.profile.ProfileFragmentDirections
 import gr.ppzglou.food.usecases.*
-import gr.ppzglou.food.util.MenuButton
-import gr.ppzglou.food.util.ResultWrapper
-import gr.ppzglou.food.util.SingleLiveEvent
+import gr.ppzglou.food.util.*
 import gr.ppzglou.food.util.connectivity.ConnectivityLiveData
-import gr.ppzglou.food.util.set
 
 class DashboardViewModel
 @ViewModelInject
@@ -35,6 +33,8 @@ constructor(
     private val searchUseCase: SearchUseCase,
     private val recipeUseCase: RecipeUseCase,
     private val updatePassUseCase: UpdatePassUseCase,
+    private val userPinDaoImpl: UserPinDaoImpl
+
     //private val uploadFileUseCase: UploadFileUseCase,
 ) : BaseViewModel(connectivityLiveData, connectivityManager) {
 
@@ -42,6 +42,10 @@ constructor(
     private var from = 0
     private var to = 10
     private var research = true
+
+
+    private val currentUser: String?
+        get() = sharedPrefs[AUTH_UUID, ""]
 
     private val _successProfile = MutableLiveData<UserProfileResponse>()
     val successProfile: LiveData<UserProfileResponse> = _successProfile
@@ -63,6 +67,12 @@ constructor(
 
     private val _successUploadedFile = SingleLiveEvent<Boolean>()
     val successUploadedFile: LiveData<Boolean> = _successUploadedFile
+
+    private val _fetchFingerprintSettings = MutableLiveData<Boolean>()
+    val fetchFingerprintSettings: LiveData<Boolean> = _fetchFingerprintSettings
+
+    private val _themeChoice = MutableLiveData<Event<String>>()
+    val themeChoice: LiveData<Event<String>> = _themeChoice
 
     fun getMenu(): MutableList<MenuButton> {
         val nav = ProfileFragmentDirections
@@ -171,6 +181,43 @@ constructor(
             }
         }
     }
+
+    fun fetchFingerprintSettings() {
+        launch {
+            if (!currentUser.isNullOrEmptyOrBlank) {
+                val users = userPinDaoImpl.getAll()
+                for (u in users) {
+                    if (u.uid == currentUser) {
+                        _fetchFingerprintSettings.value = u.fingerprint
+                    }
+                }
+                if (_fetchFingerprintSettings.value == null) {
+                    _error.value = ERROR_GENERAL
+                }
+            }
+        }
+    }
+
+
+    fun changeFingerprintSettings() {
+        launch {
+            if (!currentUser.isNullOrEmptyOrBlank) {
+                val users = userPinDaoImpl.getAll()
+                for (u in users) {
+                    if (u.uid == currentUser) {
+                        userPinDaoImpl.insert(UserPinEntity(currentUser!!, u.pin, !u.fingerprint))
+                    }
+                }
+            }
+        }
+    }
+
+    fun changeTheme(choice: String) {
+        sharedPrefs[THEME_MODE] = choice
+        _themeChoice.value = Event(choice)
+    }
+
+    fun getTheme() = sharedPrefs[THEME_MODE, ""]
 
 /* fun uploadFile(uri: Uri, name: String) {
      launch(DELAY) {

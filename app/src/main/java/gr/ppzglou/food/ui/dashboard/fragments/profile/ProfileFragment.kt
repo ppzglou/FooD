@@ -1,11 +1,13 @@
 package gr.ppzglou.food.ui.dashboard.fragments.profile
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import gr.ppzglou.food.R
 import gr.ppzglou.food.base.BaseFragment
 import gr.ppzglou.food.databinding.FragmentProfileBinding
+import gr.ppzglou.food.ext.isNullOrEmptyOrNullString
 import gr.ppzglou.food.ext.safeNavigate
 import gr.ppzglou.food.ui.dashboard.DashboardViewModel
 
@@ -22,7 +24,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), ProfileAdapter.O
             with(binding) {
                 name.text = it.name
                 email.text = it.email
-                phone.text = it.phone
+                if (!it.phone.isNullOrEmptyOrNullString) {
+                    phone.text = it.phone
+                    phone.isVisible = true
+                }
             }
         }
     }

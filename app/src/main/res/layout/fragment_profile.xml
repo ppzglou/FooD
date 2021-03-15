@@ -93,6 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     tools:text="6977777777"
+                    android:visibility="gone"
                     android:textAlignment="center"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
