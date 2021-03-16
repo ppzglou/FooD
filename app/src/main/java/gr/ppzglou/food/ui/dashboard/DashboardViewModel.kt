@@ -99,7 +99,7 @@ constructor(
         launchSearch(DELAY) {
             when (val response = profileUseCase()) {
                 is ResultWrapper.Success -> {
-                    _successProfile.value = response.data
+                    _successProfile.value = response.data!!
                 }
             }
         }
@@ -132,7 +132,7 @@ constructor(
                             to += 10
                             research = false
                         } else
-                            _successSearch.value = list
+                            _successSearch.value = list!!
                     }
                 }
             }
@@ -156,7 +156,7 @@ constructor(
                 is ResultWrapper.Success -> {
                     sharedPrefs[AUTH_UUID] = null
                     sharedPrefs[AUTH_IS_VERIFIED] = null
-                    _successLogout.value = response.data
+                    _successLogout.value = response.data!!
                 }
             }
         }
@@ -166,7 +166,7 @@ constructor(
         launch(DELAY) {
             when (val response = updateEmailUseCase(UpdateEmailRequest(email, pass))) {
                 is ResultWrapper.Success -> {
-                    _successEmailUpdated.value = response.data
+                    _successEmailUpdated.value = response.data!!
                 }
             }
         }
@@ -176,7 +176,7 @@ constructor(
         launch(DELAY) {
             when (val response = updatePassUseCase(UpdatePassRequest(oldPass, newPass))) {
                 is ResultWrapper.Success -> {
-                    _successPassUpdated.value = response.data
+                    _successPassUpdated.value = response.data!!
                 }
             }
         }

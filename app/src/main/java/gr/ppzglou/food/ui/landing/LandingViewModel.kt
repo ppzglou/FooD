@@ -105,7 +105,7 @@ constructor(
         launch {
             when (val response = addUserFireStoreUserUseCase(request)) {
                 is ResultWrapper.Success -> {
-                    _successRegister.value = response.data
+                    _successRegister.value = response.data!!
                 }
             }
         }
@@ -115,7 +115,7 @@ constructor(
         launch {
             when (val response = verificationEmailUseCase()) {
                 is ResultWrapper.Success -> {
-                    _successVerEmail.value = response.data
+                    _successVerEmail.value = response.data!!
                 }
             }
         }
@@ -125,7 +125,7 @@ constructor(
         launch(DELAY) {
             when (val response = resetPasswordUseCase(ResetPasswordRequest(email))) {
                 is ResultWrapper.Success -> {
-                    _successResetPass.value = response.data
+                    _successResetPass.value = response.data!!
                 }
             }
         }

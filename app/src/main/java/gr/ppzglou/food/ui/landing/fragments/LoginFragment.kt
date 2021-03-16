@@ -53,11 +53,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     override fun setupObservers() {
-        viewModel.successLogin.observe(viewLifecycleOwner) {
+        viewModel.successLogin.observe(this, {
             viewModel.fetchDaoUserPin()
             activity?.foodToast("oook")
 
-        }
+        })
         viewModel.successVerEmail.observe(viewLifecycleOwner) {
             activity?.foodToast("des ta email sou")
             binding.resendEmailBtn.visibility = View.INVISIBLE

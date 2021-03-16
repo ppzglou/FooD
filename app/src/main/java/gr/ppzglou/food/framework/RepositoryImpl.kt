@@ -39,8 +39,9 @@ class RepositoryImpl(
         }
 
     override suspend fun currentUserRemote(): ResultWrapper<CurrentUserResponse> {
-        val user = firebaseAuth.currentUser ?: throw BaseException(ERROR_GENERAL)
-        return ResultWrapper.Success((CurrentUserResponse(user.uid, user.isEmailVerified)))
+        return firebaseAuth.currentUser?.let {
+            ResultWrapper.Success((CurrentUserResponse(it.uid, it.isEmailVerified)))
+        } ?: throw BaseException(ERROR_GENERAL)
     }
 
 

@@ -1,6 +1,5 @@
 package gr.ppzglou.food.ext
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.graphics.Color
@@ -10,9 +9,6 @@ import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.BlendModeColorFilterCompat
-import androidx.core.graphics.BlendModeCompat
 import com.tapadoo.alerter.Alerter
 import gr.ppzglou.food.*
 
@@ -44,20 +40,9 @@ fun Dialog.createPopUpDialog(
     this.show()
 }
 
-@SuppressLint("ResourceType")
+
 fun Activity.foodToast(message: String) {
     val toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
-    val view = toast.view!!
-
-    view.background.colorFilter =
-        BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-            Color.parseColor(this.getString(R.color.colorPrimaryDark)),
-            BlendModeCompat.SRC_ATOP
-        )
-
-    val text: TextView = view.findViewById(android.R.id.message)
-    text.setTextColor(ContextCompat.getColor(text.context, R.color.colorWhite))
-
     toast.show()
 }
 

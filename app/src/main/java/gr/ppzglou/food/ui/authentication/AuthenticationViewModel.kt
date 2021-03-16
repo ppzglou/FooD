@@ -125,7 +125,7 @@ constructor(
                 is ResultWrapper.Success -> {
                     sharedPrefs[AUTH_UUID] = null
                     sharedPrefs[AUTH_IS_VERIFIED] = null
-                    _successLogout.value = response.data
+                    _successLogout.value = response.data!!
                 }
             }
         }
