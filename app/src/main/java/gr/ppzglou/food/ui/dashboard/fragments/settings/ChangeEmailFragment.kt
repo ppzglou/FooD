@@ -27,7 +27,7 @@ class ChangeEmailFragment : BaseFragment<FragmentChangeEmailBinding>() {
 
     override fun setupObservers() {
         viewModel.successEmailUpdated.observe(viewLifecycleOwner) {
-            activity?.foodToast("ook emial")
+            activity?.foodToast("success changed!")
         }
 
     }

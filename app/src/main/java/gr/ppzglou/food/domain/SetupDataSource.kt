@@ -18,6 +18,8 @@ interface SetupDataSource {
 
     suspend fun logout(): ResultWrapper<Boolean>
 
+    suspend fun auth(pass: String): ResultWrapper<Boolean>
+
     suspend fun login(request: LoginRequest): ResultWrapper<CurrentUserResponse>
 
     suspend fun register(request: RegisterRequest): ResultWrapper<CurrentUserResponse>
@@ -43,6 +45,10 @@ interface SetupDataSource {
     suspend fun userProfile(): ResultWrapper<UserProfileResponse>
 
     suspend fun uploadFileToStorage(request: UploadFileRequest): ResultWrapper<Boolean>
+
+    suspend fun getPersonalDetails(): ResultWrapper<PersonalDetailsModel>
+
+    suspend fun setPersonalDetails(request: PersonalDetailsModel): ResultWrapper<Boolean>
 
 
 }

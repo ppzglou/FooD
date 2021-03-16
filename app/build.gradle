@@ -160,6 +160,10 @@ dependencies {
 
     //countDown timer
     implementation 'ir.samanjafari.easycountdowntimer:easycountdowntimer:2.5.0'
+
+    //Country Phone Code Picker
+    implementation 'com.hbb20:ccp:2.4.2'
+    implementation 'io.michaelrocks:libphonenumber-android:8.12.6'
 }
 
 kapt {

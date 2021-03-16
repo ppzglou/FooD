@@ -24,6 +24,9 @@ class SetupDataSourceImpl(
     override suspend fun logout() =
         repository.logoutRemote()
 
+    override suspend fun auth(pass: String): ResultWrapper<Boolean> =
+        repository.authRemote(pass)
+
     override suspend fun login(request: LoginRequest) =
         repository.loginRemote(request)
 
@@ -62,5 +65,11 @@ class SetupDataSourceImpl(
 
     override suspend fun uploadFileToStorage(request: UploadFileRequest): ResultWrapper<Boolean> =
         repository.uploadFileToStorageRemote(request)
+
+    override suspend fun getPersonalDetails(): ResultWrapper<PersonalDetailsModel> =
+        repository.getPersonalDetailsRemote()
+
+    override suspend fun setPersonalDetails(request: PersonalDetailsModel): ResultWrapper<Boolean> =
+        repository.setPersonalDetailsRemote(request)
 
 }

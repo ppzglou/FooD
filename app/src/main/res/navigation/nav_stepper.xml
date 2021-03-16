@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stepper_nav_graph"
+    app:startDestination="@id/nav_stepper_phone">
+
+    <fragment
+        android:id="@+id/nav_stepper_phone"
+        android:name="gr.ppzglou.food.ui.stepper.StepperPhoneFragment"
+        android:label="StepperPhone"
+        tools:layout="@layout/fragment_stepper_phone">
+        <action
+            android:id="@+id/action_nav_stepper_phone_to_nav_stepper_pesronal_info"
+            app:destination="@id/nav_stepper_personal_info"
+            app:popUpTo="@id/nav_stepper_phone"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_stepper_personal_info"
+        android:name="gr.ppzglou.food.ui.stepper.StepperPersonalInfoFragment"
+        android:label="StepperPersonalInfo"
+        tools:layout="@layout/fragment_stepper_personal_info">
+        <action
+            android:id="@+id/action_nav_stepper_personal_info_to_nav_stepper_phone"
+            app:destination="@id/nav_stepper_phone"
+            app:popUpTo="@id/nav_stepper_personal_info"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+
+</navigation>

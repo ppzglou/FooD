@@ -73,7 +73,7 @@
 
     <fragment
         android:id="@+id/nav_personal_details_settings"
-        android:name="com.ppzglou.eforologiki.ui.dashboard.fragments.settings.personal.PersonalDetailsSettingsFragment"
+        android:name="gr.ppzglou.food.ui.dashboard.fragments.settings.PersonalDetailsSettingsFragment"
         android:label="PersonalDetailsSettings"
         tools:layout="@layout/fragment_personal_details_settings">
         <action
@@ -82,97 +82,19 @@
         <action
             android:id="@+id/action_nav_personal_details_settings_to_nav_change_personal_details"
             app:destination="@id/nav_change_personal_details" />
-        <action
-            android:id="@+id/action_nav_personal_details_settings_to_nav_change_address"
-            app:destination="@id/nav_change_address" />
-        <action
-            android:id="@+id/action_nav_personal_details_settings_to_nav_change_am_codes"
-            app:destination="@id/nav_change_am_codes" />
-        <action
-            android:id="@+id/action_nav_personal_details_settings_to_nav_change_taxis"
-            app:destination="@id/nav_change_taxis" />
-        <action
-            android:id="@+id/action_nav_personal_details_settings_to_nav_change_income"
-            app:destination="@id/nav_change_income" />
-        <action
-            android:id="@+id/action_nav_personal_details_settings_to_nav_change_more_info"
-            app:destination="@id/nav_change_more_info" />
-        <action
-            android:id="@+id/action_nav_personal_details_settings_to_nav_change_dependent_members"
-            app:destination="@id/nav_change_dependent_members" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_change_phone"
-        android:name="gr.ppzglou.food.ui.dashboard.fragments.settings.personal.ChangePhoneFragment"
+        android:name="gr.ppzglou.food.ui.dashboard.fragments.settings.ChangePhoneFragment"
         android:label="ChangePhone"
         tools:layout="@layout/fragment_change_phone" />
 
     <fragment
         android:id="@+id/nav_change_personal_details"
-        android:name="com.ppzglou.eforologiki.ui.dashboard.fragments.settings.personal.ChangePersonalInfoFragment"
+        android:name="gr.ppzglou.food.ui.dashboard.fragments.settings.ChangePersonalInfoFragment"
         android:label="ChangePersonalInfo"
         tools:layout="@layout/fragment_change_personal_info" />
-
-    <fragment
-        android:id="@+id/nav_change_address"
-        android:name="com.ppzglou.eforologiki.ui.dashboard.fragments.settings.personal.ChangeAddressFragment"
-        android:label="ChangeAddress"
-        tools:layout="@layout/fragment_change_address" />
-
-    <fragment
-        android:id="@+id/nav_change_am_codes"
-        android:name="com.ppzglou.eforologiki.ui.dashboard.fragments.settings.personal.ChangeAmCodesFragment"
-        android:label="ChangeAmCodes"
-        tools:layout="@layout/fragment_change_am_codes" />
-
-    <fragment
-        android:id="@+id/nav_change_taxis"
-        android:name="com.ppzglou.eforologiki.ui.dashboard.fragments.settings.personal.ChangeTaxisFragment"
-        android:label="ChangeTaxis"
-        tools:layout="@layout/fragment_change_taxis" />
-
-    <fragment
-        android:id="@+id/nav_change_income"
-        android:name="com.ppzglou.eforologiki.ui.dashboard.fragments.settings.personal.ChangeIncomeFragment"
-        android:label="ChangeIncome"
-        tools:layout="@layout/fragment_change_income" />
-
-    <fragment
-        android:id="@+id/nav_change_more_info"
-        android:name="com.ppzglou.eforologiki.ui.dashboard.fragments.settings.personal.ChangeMoreInfoFragment"
-        android:label="ChangeMoreInfo"
-        tools:layout="@layout/fragment_change_more_info" />
-
-    <fragment
-        android:id="@+id/nav_change_dependent_members"
-        android:name="com.ppzglou.eforologiki.ui.dashboard.fragments.settings.personal.ChangeDependentMembersFragment"
-        android:label="ChangeDependentMembers"
-        tools:layout="@layout/fragment_change_dependent_members">
-        <action
-            android:id="@+id/action_nav_change_dependent_members_to_nav_change_add_dependent_member"
-            app:destination="@id/nav_change_add_dependent_member" />
-        <action
-            android:id="@+id/action_nav_change_dependent_members_to_nav_change_edit_dependent_member"
-            app:destination="@id/nav_change_edit_dependent_member" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_change_add_dependent_member"
-        android:name="com.ppzglou.eforologiki.ui.dashboard.fragments.settings.personal.ChangeAddDependentMemberFragment"
-        android:label="ChangeAddDependentMember"
-        tools:layout="@layout/fragment_change_add_dependent_member" />
-
-    <fragment
-        android:id="@+id/nav_change_edit_dependent_member"
-        android:name="com.ppzglou.eforologiki.ui.dashboard.fragments.settings.personal.ChangeEditDependentMemberFragment"
-        android:label="ChangeEditDependentMember"
-        tools:layout="@layout/fragment_change_edit_dependent_member">
-
-        <argument
-            android:name="position"
-            app:argType="integer" />
-    </fragment>
 
     <fragment
         android:id="@+id/nav_access_details_settings"

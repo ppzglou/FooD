@@ -37,6 +37,7 @@ constructor(
     private val updatePassUseCase: UpdatePassUseCase,
     private val userPinDaoImpl: UserPinDaoImpl,
     private val uploadFileUseCase: UploadFileUseCase,
+    private val authUseCase: AuthUseCase,
 ) : BaseViewModel(connectivityLiveData, connectivityManager) {
 
     private val DELAY = 10
@@ -72,6 +73,15 @@ constructor(
 
     private val _themeChoice = MutableLiveData<Event<String>>()
     val themeChoice: LiveData<Event<String>> = _themeChoice
+
+    private val _successAuth = MutableLiveData<Boolean>()
+    val successAuth: LiveData<Boolean> = _successAuth
+
+    private val _daoUserPin = MutableLiveData<Boolean>()
+    val fetchDaoUserPin: LiveData<Boolean> = _daoUserPin
+
+    private val _successPinChanged = MutableLiveData<Boolean>()
+    val successPinChanged: LiveData<Boolean> = _successPinChanged
 
     fun getMenu(): MutableList<MenuButton> {
         val nav = ProfileFragmentDirections
@@ -220,6 +230,53 @@ constructor(
                 uploadFileUseCase(UploadFileRequest(uri))) {
                 is ResultWrapper.Success -> {
                     _successUploadedFile.value = response.data!!
+                }
+            }
+        }
+    }
+
+    fun auth(pass: String) {
+        launch(DELAY) {
+            when (val response = authUseCase(pass)) {
+                is ResultWrapper.Success -> {
+                    _successAuth.value = response.data
+                }
+            }
+        }
+    }
+
+    fun fetchDaoUserPin(pin: String) {
+        launch {
+            if (!currentUser.isNullOrEmptyOrBlank) {
+                val users = userPinDaoImpl.getAll()
+
+                for (u in users) {
+                    if (u.uid == currentUser && u.pin == pin) {
+                        _daoUserPin.value = true
+                        break
+                    }
+                }
+                if (_daoUserPin.value == null) {
+                    _error.value = ERROR_PIN_OF_USER_IS_WRONG
+                }
+            }
+        }
+    }
+
+    fun changePin(pin: String) {
+        launch {
+            if (!currentUser.isNullOrEmptyOrBlank) {
+                val users = userPinDaoImpl.getAll()
+
+                for (u in users) {
+                    if (u.uid == currentUser) {
+                        userPinDaoImpl.insert(UserPinEntity(u.uid, pin, u.fingerprint))
+                        _successPinChanged.value = true
+                        break
+                    }
+                }
+                if (_successPinChanged.value == null) {
+                    _error.value = ERROR_PIN_OF_USER_IS_WRONG
                 }
             }
         }

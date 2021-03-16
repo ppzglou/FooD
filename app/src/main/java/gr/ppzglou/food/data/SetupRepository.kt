@@ -19,6 +19,8 @@ interface SetupRepository {
 
     suspend fun loginRemote(request: LoginRequest): ResultWrapper<CurrentUserResponse>
 
+    suspend fun authRemote(pass: String): ResultWrapper<Boolean>
+
     suspend fun registerRemote(request: RegisterRequest): ResultWrapper<CurrentUserResponse>
 
     suspend fun updateDisplayNameRemote(request: UpdateDisplayNameRequest): ResultWrapper<Boolean>
@@ -42,6 +44,10 @@ interface SetupRepository {
     suspend fun userProfileRemote(): ResultWrapper<UserProfileResponse>
 
     suspend fun uploadFileToStorageRemote(request: UploadFileRequest): ResultWrapper<Boolean>
+
+    suspend fun getPersonalDetailsRemote(): ResultWrapper<PersonalDetailsModel>
+
+    suspend fun setPersonalDetailsRemote(request: PersonalDetailsModel): ResultWrapper<Boolean>
 
 
 }

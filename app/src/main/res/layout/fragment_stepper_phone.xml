@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gr.ppzglou.food.util.CustomConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".ui.stepper.StepperPhoneFragment">
+
+    <View
+        android:id="@+id/phone_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone_layout" />
+
+    <View
+        android:id="@+id/otp_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorWhite"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otp_code_layout" />
+
+    <ScrollView
+        android:id="@+id/phone_layout"
+        style="@style/ScrollViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <gr.ppzglou.food.util.CustomConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/phone_title"
+                android:textSize="@dimen/text_xlarge_26sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Επαλύθεσυη κινητού"
+                android:textColor="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/phone_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:text="Πληκτρολογήστε τον αριθμό σας για να επαληθεύσεται τον λογαρισμό σας."
+                android:textColor="@color/colorWhite"
+                app:layout_constraintTop_toBottomOf="@+id/phone_title" />
+
+            <ImageView
+                android:id="@+id/phone_img"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_set_phone"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone_description"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <ImageView
+                android:id="@+id/phone_verified_img"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_phone_verified"
+                android:visibility="invisible"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone_description"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <ImageView
+                android:id="@+id/wave_img"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_wave"
+                android:backgroundTint="@color/colorWhite"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone_img" />
+
+            <gr.ppzglou.food.util.CustomConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/wave_img">
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/country_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    app:ccpDialog_backgroundColor="@color/colorGrayLight"
+                    app:ccpDialog_textColor="@color/colorBlack"
+                    app:ccp_contentColor="@color/colorPrimaryDark"
+                    app:ccp_defaultLanguage="GREEK"
+                    app:ccp_defaultNameCode="GR"
+                    app:ccp_showFlag="false"
+                    app:ccp_showNameCode="false"
+                    app:ccp_textSize="@dimen/text_default_14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/phone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/phone" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phone"
+                    style="@style/FEditText.White"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="40dp"
+                    android:hint="phone"
+                    app:errorIconDrawable="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/country_picker"
+                    app:layout_constraintTop_toBottomOf="@+id/phone_img">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/TextInputEditTextTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:maxLength="20" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/change_phone_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="Ο αριθμός σας έχει ήδη επαληθευθεί. Θέλετε να τον αλλάξετε;"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/phone" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/change_my_phone_btn"
+                    style="@style/FButton.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:text="Αλλαγή αριθμού"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/change_phone_title" />
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/send_code_btn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/send_code_btn" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/send_code_btn"
+                    style="@style/FButton.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:text="Αποστολή κωδικού"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/phone" />
+
+                <ImageView
+                    android:id="@+id/next"
+                    style="@style/FStepperRemoteButtons"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ic_next"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/change_my_phone_btn" />
+
+            </gr.ppzglou.food.util.CustomConstraintLayout>
+
+
+        </gr.ppzglou.food.util.CustomConstraintLayout>
+
+
+    </ScrollView>
+
+
+    <ScrollView
+        android:id="@+id/otp_code_layout"
+        style="@style/ScrollViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <gr.ppzglou.food.util.CustomConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/otp_title"
+                android:textSize="@dimen/text_xlarge_26sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="6ψήφιος κωδικός"
+                android:textColor="@color/colorWhite" />
+
+            <TextView
+                android:id="@+id/otp_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:text="Πληκτρολογίστε τον 6ψήφιο κωδικό που λάβατε στον αριθμό σας."
+                android:textColor="@color/colorWhite"
+                app:layout_constraintTop_toBottomOf="@+id/otp_title" />
+
+            <ImageView
+                android:id="@+id/code_img"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_get_message"
+                app:layout_constraintDimensionRatio="2:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/otp_message"
+                app:layout_constraintWidth_percent="0.7" />
+
+            <ImageView
+                android:id="@+id/wave"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_wave"
+                android:backgroundTint="@color/colorWhite"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/code_img" />
+
+            <gr.ppzglou.food.util.CustomConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                app:layout_constraintTop_toBottomOf="@+id/wave">
+
+                <LinearLayout
+                    android:id="@+id/code_edittext_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/code_img">
+
+                    <EditText
+                        android:id="@+id/ed1"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/f_otp_field_primary_trans"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/ed2"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/f_otp_field_primary_trans"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/ed3"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/f_otp_field_primary_trans"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/ed4"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/f_otp_field_primary_trans"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/ed5"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/f_otp_field_primary_trans"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/ed6"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/f_otp_field_primary_trans"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textColor="@color/colorBlack" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/otp_code_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/error_otp"
+                    android:textColor="@color/colorErrorPink"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/code_edittext_layout" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/verification_btn"
+                    style="@style/FButton.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:text="Επαλήθεσυη"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/otp_code_error" />
+
+                <ir.samanjafari.easycountdowntimer.EasyCountDownTextview
+                    android:id="@+id/timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:colonColor="@color/colorBlack"
+                    app:digitBackground="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/verification_btn"
+                    app:showDays="false"
+                    app:showHours="false"
+                    app:start_automatically="false"
+                    app:textColor="@color/colorBlack" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/resend_code_btn"
+                    style="@style/SecButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:text="Νέα αποστολή κωδικού"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/timer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/change_phone_btn"
+                    style="@style/SecButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:text="Αλλαγή αριθμού"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/resend_code_btn" />
+
+
+            </gr.ppzglou.food.util.CustomConstraintLayout>
+
+        </gr.ppzglou.food.util.CustomConstraintLayout>
+
+    </ScrollView>
+
+</gr.ppzglou.food.util.CustomConstraintLayout>
+
+

@@ -18,6 +18,7 @@ import gr.ppzglou.food.ext.createPopUpDialog
 import gr.ppzglou.food.ext.safeNavigate
 import gr.ppzglou.food.ui.dashboard.DashboardViewModel
 import gr.ppzglou.food.ui.landing.LandingActivity
+import gr.ppzglou.food.ui.stepper.StepperActivity
 
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
@@ -59,8 +60,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
                 )
             }
             quickSetup.setOnClickListener {
-                /* val intent = Intent(context, StepperActivity::class.java)
-                 startActivity(intent)*/
+                val intent = Intent(context, StepperActivity::class.java)
+                startActivity(intent)
             }
             changePersonalDetailsBtn.setOnClickListener {
                 findNavController().safeNavigate(

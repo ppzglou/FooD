@@ -5,6 +5,9 @@ import androidx.fragment.app.activityViewModels
 import gr.ppzglou.food.R
 import gr.ppzglou.food.base.BaseFragment
 import gr.ppzglou.food.databinding.FragmentChangePinBinding
+import gr.ppzglou.food.ext.foodErrorSnackBar
+import gr.ppzglou.food.ext.foodToast
+import gr.ppzglou.food.ext.isNotEmpty
 import gr.ppzglou.food.ext.isValidPin
 import gr.ppzglou.food.ui.dashboard.DashboardViewModel
 
@@ -29,7 +32,7 @@ class ChangePinFragment : BaseFragment<FragmentChangePinBinding>() {
                 choiceErrorTxt.isVisible = false
             }
             changePinBtn.setOnClickListener {
-                /*if (validate()) {
+                if (validate()) {
                     when {
                         oldPin.isVisible -> {
                             if (oldPin.isNotEmpty())
@@ -43,24 +46,24 @@ class ChangePinFragment : BaseFragment<FragmentChangePinBinding>() {
                             choiceErrorTxt.isVisible = true
                         }
                     }
-                }*/
+                }
             }
         }
     }
 
     override fun setupObservers() {
-        /*viewModel.successAuth.observe(viewLifecycleOwner) {
+        viewModel.successAuth.observe(viewLifecycleOwner) {
             viewModel.changePin(binding.newPin.editText?.text.toString())
         }
         viewModel.fetchDaoUserPin.observe(viewLifecycleOwner) {
             viewModel.changePin(binding.newPin.editText?.text.toString())
         }
         viewModel.successPinChanged.observe(viewLifecycleOwner) {
-            activity?.eForologikiToast("ok pin")
+            activity?.foodToast("success changed!")
         }
         viewModel.error.observe(viewLifecycleOwner) {
-            activity?.eForologikiErrorSnackBar(it)
-        }*/
+            activity?.foodErrorSnackBar(it)
+        }
     }
 
     private fun validate(): Boolean {

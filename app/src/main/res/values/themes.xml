@@ -162,4 +162,28 @@
         <item name="android:stateListAnimator">@null</item>
     </style>
 
+    <style name="FStepBullet">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:elevation">2dp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/text_medium_18sp</item>
+        <item name="android:background">@drawable/f_stepper_primary_100</item>
+        <item name="layout_constraintDimensionRatio">1:1</item>
+        <item name="layout_constraintWidth_percent">0.1</item>
+    </style>
+
+    <style name="FStepperRemoteButtons">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="tint">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>

@@ -50,6 +50,13 @@ class RepositoryImpl(
         return ResultWrapper.Success(true)
     }
 
+    override suspend fun authRemote(pass: String): ResultWrapper<Boolean> {
+        if (firebaseAuth.currentUser?.email == null) throw BaseException(ERROR_GENERAL)
+
+        firebaseAuth.signInWithEmailAndPassword(firebaseAuth.currentUser!!.email!!, pass).await()
+
+        return ResultWrapper.Success(true)
+    }
 
     override suspend fun loginRemote(request: LoginRequest): ResultWrapper<CurrentUserResponse> {
         if (request.email == null || request.password == null) {
@@ -187,6 +194,36 @@ class RepositoryImpl(
 
         val fileRef = storage.child("profile_pics/$storageName")
         fileRef.putFile(request.uri).await()
+
+        return ResultWrapper.Success(true)
+    }
+
+    override suspend fun getPersonalDetailsRemote(): ResultWrapper<PersonalDetailsModel> {
+        val user = firebaseAuth.currentUser ?: throw BaseException(ERROR_GENERAL)
+
+        val userDataDoc =
+            fireStoreDB.collection(USERS).document(user.uid).get().await()
+
+        val userDetails = PersonalDetailsModel(
+            name = userDataDoc.getString("name"),
+            sname = userDataDoc.getString("last_name")
+        )
+        return ResultWrapper.Success(userDetails)
+    }
+
+    override suspend fun setPersonalDetailsRemote(request: PersonalDetailsModel): ResultWrapper<Boolean> {
+        if (request.name == null || request.sname == null)
+            throw BaseException(ERROR_GENERAL)
+
+        val user = firebaseAuth.currentUser ?: throw BaseException(ERROR_GENERAL)
+        val name = request.name.replace("\\s".toRegex(), "")
+        val sname = request.sname.replace("\\s".toRegex(), "")
+        val userHash: MutableMap<String, Any> = HashMap()
+        userHash["name"] = name
+        userHash["last_name"] = sname
+
+        fireStoreDB.collection(USERS).document(user.uid).update(userHash).await()
+        updateDisplayNameRemote(UpdateDisplayNameRequest("$name $sname"))
 
         return ResultWrapper.Success(true)
     }

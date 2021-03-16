@@ -4,6 +4,7 @@ import androidx.fragment.app.activityViewModels
 import gr.ppzglou.food.R
 import gr.ppzglou.food.base.BaseFragment
 import gr.ppzglou.food.databinding.FragmentChangePassBinding
+import gr.ppzglou.food.ext.foodToast
 import gr.ppzglou.food.ext.isNotEmpty
 import gr.ppzglou.food.ext.isValidPassword
 import gr.ppzglou.food.ui.dashboard.DashboardViewModel
@@ -16,10 +17,10 @@ class ChangePassFragment : BaseFragment<FragmentChangePassBinding>() {
         FragmentChangePassBinding.inflate(layoutInflater)
 
     override fun setupObservers() {
-        /* viewModel.successPassUpdated.observe(viewLifecycleOwner) {
-             activity?.eForologikiToast("Το password άλλαξε με επιτυχία!")
-             activity?.onBackPressed()
-         }*/
+        viewModel.successPassUpdated.observe(viewLifecycleOwner) {
+            activity?.foodToast("success changed!")
+            activity?.onBackPressed()
+        }
     }
 
     override fun setupListeners() {
