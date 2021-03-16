@@ -2,6 +2,7 @@ package gr.ppzglou.food.ui.dashboard
 
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
+import android.net.Uri
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +12,7 @@ import gr.ppzglou.food.dao.UserPinDaoImpl
 import gr.ppzglou.food.dao.UserPinEntity
 import gr.ppzglou.food.data.models.UpdateEmailRequest
 import gr.ppzglou.food.data.models.UpdatePassRequest
+import gr.ppzglou.food.data.models.UploadFileRequest
 import gr.ppzglou.food.data.models.UserProfileResponse
 import gr.ppzglou.food.ext.isNullOrEmptyOrBlank
 import gr.ppzglou.food.framework.Hits
@@ -33,16 +35,13 @@ constructor(
     private val searchUseCase: SearchUseCase,
     private val recipeUseCase: RecipeUseCase,
     private val updatePassUseCase: UpdatePassUseCase,
-    private val userPinDaoImpl: UserPinDaoImpl
-
-    //private val uploadFileUseCase: UploadFileUseCase,
+    private val userPinDaoImpl: UserPinDaoImpl,
+    private val uploadFileUseCase: UploadFileUseCase,
 ) : BaseViewModel(connectivityLiveData, connectivityManager) {
 
     private val DELAY = 10
     private var from = 0
     private var to = 10
-    private var research = true
-
 
     private val currentUser: String?
         get() = sharedPrefs[AUTH_UUID, ""]
@@ -112,28 +111,24 @@ constructor(
                     _successSearch.value = response.data.hits
                     from = 0
                     to = 10
-                    research = true
                 }
             }
         }
     }
 
     fun updateSearchData(txt: String) {
-        if (research) {
-            launchSearch(DELAY) {
-                from += 10
-                to += 10
-                when (val response = searchUseCase(SearchRequest(txt, from, to))) {
-                    is ResultWrapper.Success -> {
-                        val list = _successSearch.value
-                        list?.addAll(response.data.hits)
-                        if (response.data.hits.isNullOrEmpty()) {
-                            from += 10
-                            to += 10
-                            research = false
-                        } else
-                            _successSearch.value = list!!
-                    }
+        launchSearch(DELAY) {
+            from += 10
+            to += 10
+            when (val response = searchUseCase(SearchRequest(txt, from, to))) {
+                is ResultWrapper.Success -> {
+                    val list = _successSearch.value
+                    list?.addAll(response.data.hits)
+                    if (response.data.hits.isNullOrEmpty()) {
+                        from += 10
+                        to += 10
+                    } else
+                        _successSearch.value = list!!
                 }
             }
         }
@@ -219,16 +214,16 @@ constructor(
 
     fun getTheme() = sharedPrefs[THEME_MODE, ""]
 
-/* fun uploadFile(uri: Uri, name: String) {
-     launch(DELAY) {
-         when (val response =
-             uploadFileUseCase(UploadFileRequest(uri, name, _successGetFiles.value))) {
-             is ResultWrapper.Success -> {
-                 _successUploadedFile.value = response.data
-             }
-         }
-     }
- }*/
+    fun uploadFile(uri: Uri) {
+        launch(DELAY) {
+            when (val response =
+                uploadFileUseCase(UploadFileRequest(uri))) {
+                is ResultWrapper.Success -> {
+                    _successUploadedFile.value = response.data!!
+                }
+            }
+        }
+    }
 
 
 }

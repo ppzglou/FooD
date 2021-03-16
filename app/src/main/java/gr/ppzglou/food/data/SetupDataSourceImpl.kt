@@ -60,4 +60,7 @@ class SetupDataSourceImpl(
     override suspend fun userProfile(): ResultWrapper<UserProfileResponse> =
         repository.userProfileRemote()
 
+    override suspend fun uploadFileToStorage(request: UploadFileRequest): ResultWrapper<Boolean> =
+        repository.uploadFileToStorageRemote(request)
+
 }

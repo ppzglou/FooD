@@ -42,4 +42,7 @@ interface SetupDataSource {
 
     suspend fun userProfile(): ResultWrapper<UserProfileResponse>
 
+    suspend fun uploadFileToStorage(request: UploadFileRequest): ResultWrapper<Boolean>
+
+
 }

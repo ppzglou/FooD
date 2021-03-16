@@ -160,7 +160,6 @@ dependencies {
 
     //countDown timer
     implementation 'ir.samanjafari.easycountdowntimer:easycountdowntimer:2.5.0'
-
 }
 
 kapt {

@@ -90,12 +90,8 @@ class RepositoryImpl(
         if (request.fname == null || request.sname == null) throw BaseException(ERROR_GENERAL)
 
         val user = firebaseAuth.currentUser ?: throw BaseException(ERROR_GENERAL)
-
         val personalHash: MutableMap<String, Any> = HashMap()
-        personalHash["birth"] = ""
-        personalHash["kg"] = ""
         personalHash["photo"] = ""
-
         fireStoreDB.collection(USERS).document(user.uid).set(personalHash).await()
 
         return ResultWrapper.Success(true)
@@ -167,14 +163,32 @@ class RepositoryImpl(
     }
 
     override suspend fun userProfileRemote(): ResultWrapper<UserProfileResponse> {
-        firebaseAuth.currentUser?.uid ?: throw BaseException(ERROR_GENERAL)
+        val uid = firebaseAuth.currentUser?.uid ?: throw BaseException(ERROR_GENERAL)
+        var photo: String? = null
+        storage.child("profile_pics/$uid").downloadUrl
+            .addOnSuccessListener {
+                photo = it.toString()
+            }.await()
 
         val userProfile = UserProfileResponse(
             name = firebaseAuth.currentUser?.displayName,
             email = firebaseAuth.currentUser?.email,
-            phone = firebaseAuth.currentUser?.phoneNumber
+            phone = firebaseAuth.currentUser?.phoneNumber,
+            photo = photo
         )
         return ResultWrapper.Success(userProfile)
+    }
+
+    override suspend fun uploadFileToStorageRemote(request: UploadFileRequest): ResultWrapper<Boolean> {
+        val user = firebaseAuth.currentUser ?: throw BaseException(ERROR_GENERAL)
+        if (request.uri == null)
+            throw BaseException(ERROR_GENERAL)
+        val storageName = user.uid
+
+        val fileRef = storage.child("profile_pics/$storageName")
+        fileRef.putFile(request.uri).await()
+
+        return ResultWrapper.Success(true)
     }
 
 }

@@ -27,10 +27,11 @@
         app:cardCornerRadius="@dimen/app_corner_radius">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/profilePic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_profile"
+            android:scaleType="centerCrop"
             android:background="@color/colorPrimary"
             app:layout_constraintTop_toBottomOf="@+id/title" />
 

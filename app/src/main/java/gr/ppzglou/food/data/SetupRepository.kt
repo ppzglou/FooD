@@ -41,4 +41,7 @@ interface SetupRepository {
 
     suspend fun userProfileRemote(): ResultWrapper<UserProfileResponse>
 
+    suspend fun uploadFileToStorageRemote(request: UploadFileRequest): ResultWrapper<Boolean>
+
+
 }
