@@ -6,21 +6,32 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import gr.ppzglou.food.dao.UserPinDB
-import gr.ppzglou.food.dao.UserPinDao
-import gr.ppzglou.food.dao.UserPinDaoImpl
+import gr.ppzglou.food.dao.fav.FavDB
+import gr.ppzglou.food.dao.fav.FavDao
+import gr.ppzglou.food.dao.fav.FavDaoImpl
+import gr.ppzglou.food.dao.userpin.UserPinDB
+import gr.ppzglou.food.dao.userpin.UserPinDao
+import gr.ppzglou.food.dao.userpin.UserPinDaoImpl
 
 @Module
 @InstallIn(ApplicationComponent::class)
 object DaoModule {
 
     @Provides
-    fun provideAnimalActionsDatabase(@ApplicationContext appContext: Context): UserPinDao {
+    fun provideUserPinDatabase(@ApplicationContext appContext: Context): UserPinDao {
         return UserPinDB.getInstance(appContext).userPinsDao()
     }
 
     @Provides
-    fun provideAnimalActionsDaoImpl(userPinDao: UserPinDao) =
+    fun provideUserPinDaoImpl(userPinDao: UserPinDao) =
         UserPinDaoImpl(userPinDao)
 
+    @Provides
+    fun provideFavDatabase(@ApplicationContext appContext: Context): FavDao {
+        return FavDB.getInstance(appContext).favDao()
+    }
+
+    @Provides
+    fun provideFavDaoImpl(favDao: FavDao) =
+        FavDaoImpl(favDao)
 }

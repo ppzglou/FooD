@@ -8,8 +8,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.ppzglou.food.*
 import gr.ppzglou.food.base.BaseViewModel
-import gr.ppzglou.food.dao.UserPinDaoImpl
-import gr.ppzglou.food.dao.UserPinEntity
+import gr.ppzglou.food.dao.userpin.UserPinDaoImpl
+import gr.ppzglou.food.dao.userpin.UserPinEntity
 import gr.ppzglou.food.data.models.UpdateEmailRequest
 import gr.ppzglou.food.data.models.UpdatePassRequest
 import gr.ppzglou.food.data.models.UploadFileRequest
@@ -127,18 +127,20 @@ constructor(
     }
 
     fun updateSearchData(txt: String) {
-        launchSearch(DELAY) {
-            from += 10
-            to += 10
-            when (val response = searchUseCase(SearchRequest(txt, from, to))) {
-                is ResultWrapper.Success -> {
-                    val list = _successSearch.value
-                    list?.addAll(response.data.hits)
-                    if (response.data.hits.isNullOrEmpty()) {
-                        from += 10
-                        to += 10
-                    } else
-                        _successSearch.value = list!!
+        if (!txt.isNullOrEmptyOrBlank) {
+            launchSearch(DELAY) {
+                from += 10
+                to += 10
+                when (val response = searchUseCase(SearchRequest(txt, from, to))) {
+                    is ResultWrapper.Success -> {
+                        val list = _successSearch.value
+                        list?.addAll(response.data.hits)
+                        if (response.data.hits.isNullOrEmpty()) {
+                            from += 10
+                            to += 10
+                        } else
+                            _successSearch.value = list!!
+                    }
                 }
             }
         }

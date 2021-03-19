@@ -21,6 +21,8 @@
     <color name="colorNav">#000000</color>
 
     <color name="colorPrimaryDarkTrans">#504CAF50</color>
+    <color name="colorWhiteTrans">#CC000000</color>
+
 
     //Stepper
     <color name="colorStepperPrimary">#000000</color>

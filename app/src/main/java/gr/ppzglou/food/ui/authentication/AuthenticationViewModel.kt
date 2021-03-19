@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.ppzglou.food.*
 import gr.ppzglou.food.base.BaseViewModel
-import gr.ppzglou.food.dao.UserPinDaoImpl
+import gr.ppzglou.food.dao.userpin.UserPinDaoImpl
 import gr.ppzglou.food.ext.isNullOrEmptyOrBlank
 import gr.ppzglou.food.usecases.LogoutUserUseCase
 import gr.ppzglou.food.util.ResultWrapper

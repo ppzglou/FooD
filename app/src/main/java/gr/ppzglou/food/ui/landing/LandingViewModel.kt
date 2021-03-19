@@ -9,8 +9,8 @@ import gr.ppzglou.food.AUTH_IS_VERIFIED
 import gr.ppzglou.food.AUTH_UUID
 import gr.ppzglou.food.ERROR_PIN_OF_USER_NOT_EXIST
 import gr.ppzglou.food.base.BaseViewModel
-import gr.ppzglou.food.dao.UserPinDaoImpl
-import gr.ppzglou.food.dao.UserPinEntity
+import gr.ppzglou.food.dao.userpin.UserPinDaoImpl
+import gr.ppzglou.food.dao.userpin.UserPinEntity
 import gr.ppzglou.food.data.models.*
 import gr.ppzglou.food.ext.isNullOrEmptyOrBlank
 import gr.ppzglou.food.usecases.*

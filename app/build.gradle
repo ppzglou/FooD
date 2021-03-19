@@ -164,6 +164,10 @@ dependencies {
     //Country Phone Code Picker
     implementation 'com.hbb20:ccp:2.4.2'
     implementation 'io.michaelrocks:libphonenumber-android:8.12.6'
+
+
+    //Flexbox recycler
+    implementation 'com.google.android:flexbox:2.0.1'
 }
 
 kapt {

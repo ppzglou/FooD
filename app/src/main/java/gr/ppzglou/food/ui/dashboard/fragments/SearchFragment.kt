@@ -29,7 +29,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), SearchAdapter.OnIt
     override fun setupObservers() {
         viewModel.successSearch.observe(this, {
             searchAdapter.submitList(it)
-            binding.recyclerView.adapter?.notifyDataSetChanged()
+            with(binding) {
+                recyclerView.adapter?.notifyDataSetChanged()
+                recyclerView.isVisible = it.isNotEmpty()
+            }
         })
         viewModel.loadSearch.observe(viewLifecycleOwner, { event ->
             event.getContentIfNotHandled()?.let {

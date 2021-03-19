@@ -1,4 +1,4 @@
-package gr.ppzglou.food.dao
+package gr.ppzglou.food.dao.userpin
 
 import android.content.Context
 import androidx.room.Database
