@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "favTable")
 data class FavEntity(
     @PrimaryKey
-    @ColumnInfo(name = "uri") val uri: String
+    @ColumnInfo(name = "uri") val uri: String,
+    @ColumnInfo(name = "uid") val uid: String
 )

@@ -12,7 +12,7 @@ interface FavDao {
     suspend fun insert(favEntity: FavEntity)
 
     @Query("SELECT * FROM favTable WHERE uri = :uri")
-    fun findById(uri: String): FavEntity
+    suspend fun findById(uri: String): FavEntity
 
     @Delete
     suspend fun delete(favEntity: FavEntity)

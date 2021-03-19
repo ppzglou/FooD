@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_nav_profile_to_nav_search"
             app:destination="@id/nav_search" />
+        <action
+            android:id="@+id/action_nav_profile_to_nav_fav"
+            app:destination="@id/nav_fav" />
     </fragment>
 
     <fragment
@@ -37,7 +40,7 @@
 
     <fragment
         android:id="@+id/nav_search"
-        android:name="gr.ppzglou.food.ui.dashboard.fragments.SearchFragment"
+        android:name="gr.ppzglou.food.ui.dashboard.fragments.recipe.SearchFragment"
         android:label="Search"
         tools:layout="@layout/fragment_search">
         <action
@@ -46,8 +49,18 @@
     </fragment>
 
     <fragment
+        android:id="@+id/nav_fav"
+        android:name="gr.ppzglou.food.ui.dashboard.fragments.recipe.FavFragment"
+        android:label="Favourites"
+        tools:layout="@layout/fragment_fav">
+        <action
+            android:id="@+id/action_nav_fav_to_nav_recipe"
+            app:destination="@id/nav_recipe" />
+    </fragment>
+
+    <fragment
         android:id="@+id/nav_recipe"
-        android:name="gr.ppzglou.food.ui.dashboard.fragments.RecipeFragment"
+        android:name="gr.ppzglou.food.ui.dashboard.fragments.recipe.RecipeFragment"
         android:label="Recipe"
         tools:layout="@layout/fragment_recipe">
         <argument

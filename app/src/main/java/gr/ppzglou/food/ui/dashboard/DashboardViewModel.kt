@@ -8,6 +8,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.ppzglou.food.*
 import gr.ppzglou.food.base.BaseViewModel
+import gr.ppzglou.food.dao.fav.FavDaoImpl
+import gr.ppzglou.food.dao.fav.FavEntity
 import gr.ppzglou.food.dao.userpin.UserPinDaoImpl
 import gr.ppzglou.food.dao.userpin.UserPinEntity
 import gr.ppzglou.food.data.models.UpdateEmailRequest
@@ -36,6 +38,7 @@ constructor(
     private val recipeUseCase: RecipeUseCase,
     private val updatePassUseCase: UpdatePassUseCase,
     private val userPinDaoImpl: UserPinDaoImpl,
+    private val favDaoImpl: FavDaoImpl,
     private val uploadFileUseCase: UploadFileUseCase,
     private val authUseCase: AuthUseCase,
 ) : BaseViewModel(connectivityLiveData, connectivityManager) {
@@ -55,6 +58,9 @@ constructor(
 
     private val _successRecipe = MutableLiveData<Recipe>()
     val successRecipe: LiveData<Recipe> = _successRecipe
+
+    private val _successRecipeList = MutableLiveData<MutableList<Hits>>()
+    val successRecipeList: LiveData<MutableList<Hits>> = _successRecipeList
 
     private val _successLogout = MutableLiveData<Boolean>()
     val successLogout: LiveData<Boolean> = _successLogout
@@ -83,6 +89,18 @@ constructor(
     private val _successPinChanged = MutableLiveData<Boolean>()
     val successPinChanged: LiveData<Boolean> = _successPinChanged
 
+    private val _daoIsFav = MutableLiveData<Boolean>()
+    val fetchDaoIsFav: LiveData<Boolean> = _daoIsFav
+
+    private val _successAddFav = MutableLiveData<Boolean>()
+    val successAddFav: LiveData<Boolean> = _successAddFav
+
+    private val _successDelFav = MutableLiveData<Boolean>()
+    val successDelFav: LiveData<Boolean> = _successDelFav
+
+    private val _successFetchFavs = MutableLiveData<MutableList<String>>()
+    val successFetchFavs: LiveData<MutableList<String>> = _successFetchFavs
+
     fun getMenu(): MutableList<MenuButton> {
         val nav = ProfileFragmentDirections
         return mutableListOf(
@@ -98,8 +116,8 @@ constructor(
             ),
             MenuButton(
                 "settings",
-                R.drawable.alerter_ic_face,
-                nav.actionNavProfileToNavSettings()
+                R.drawable.ic_heart,
+                nav.actionNavProfileToNavFav()
             )
         )
     }
@@ -153,6 +171,20 @@ constructor(
                     _successRecipe.value = response.data[0]
                 }
             }
+        }
+    }
+
+    fun recipeList(uriList: MutableList<String>) {
+        launch(DELAY) {
+            val list = mutableListOf<Hits>()
+            for (uri in uriList) {
+                when (val response = recipeUseCase(uri)) {
+                    is ResultWrapper.Success -> {
+                        list.add(Hits(response.data[0]))
+                    }
+                }
+            }
+            _successRecipeList.value = list
         }
     }
 
@@ -284,6 +316,50 @@ constructor(
         }
     }
 
+    fun isFav(uri: String) {
+        launch {
+            if (!currentUser.isNullOrEmptyOrBlank) {
+                val fav = favDaoImpl.findById(uri)
+                _daoIsFav.value = (fav != null && fav.uid == currentUser)
+            }
+        }
+    }
+
+    fun addDaoFav(uri: String) {
+        launch {
+            if (!currentUser.isNullOrEmptyOrBlank) {
+                favDaoImpl.insert(FavEntity(uri, currentUser!!)).let {
+                    _successAddFav.value = true
+                }
+            }
+        }
+    }
+
+    fun deleteDaoFav(uri: String) {
+        launch {
+            if (!currentUser.isNullOrEmptyOrBlank) {
+                val fav = favDaoImpl.findById(uri)
+                if (fav.uid == currentUser)
+                    favDaoImpl.delete(fav).let {
+                        _successDelFav.value = true
+                    }
+            }
+        }
+    }
+
+    fun fetchFavsDao() {
+        launch {
+            val favsCurrentUser = mutableListOf<String>()
+            if (!currentUser.isNullOrEmptyOrBlank) {
+                val favsList = favDaoImpl.getAll()
+                for (fav in favsList) {
+                    if (fav.uid == currentUser)
+                        favsCurrentUser.add(fav.uri)
+                }
+            }
+            _successFetchFavs.value = favsCurrentUser
+        }
+    }
 
 }
 

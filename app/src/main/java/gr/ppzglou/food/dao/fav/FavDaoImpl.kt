@@ -14,7 +14,7 @@ class FavDaoImpl @Inject constructor(
         favDao.insert(favEntity)
     }
 
-    override fun findById(id: String): FavEntity {
+    override suspend fun findById(id: String): FavEntity {
         return favDao.findById(id)
     }
 

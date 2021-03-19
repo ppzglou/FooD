@@ -1,4 +1,4 @@
-package gr.ppzglou.food.ui.dashboard.fragments
+package gr.ppzglou.food.ui.dashboard.fragments.recipe
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package gr.ppzglou.food.ui.dashboard.fragments
+package gr.ppzglou.food.ui.dashboard.fragments.recipe
 
 import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
