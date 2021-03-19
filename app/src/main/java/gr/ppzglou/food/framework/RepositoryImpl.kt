@@ -13,7 +13,6 @@ import gr.ppzglou.food.data.SetupRepository
 import gr.ppzglou.food.data.models.*
 import gr.ppzglou.food.ext.BaseException
 import gr.ppzglou.food.ext.handleApiFormat
-import gr.ppzglou.food.ext.isNullOrEmptyOrBlank
 import gr.ppzglou.food.ext.networkCall
 import gr.ppzglou.food.util.ResultWrapper
 import kotlinx.coroutines.tasks.await
@@ -106,7 +105,7 @@ class RepositoryImpl(
         val hash = hashMapOf(
             "name" to request.fname,
             "sname" to request.sname,
-            "photo" to ""
+            "photo" to false
         )
         fireStoreDB.collection(USERS).document(user.uid).set(hash).await()
 
@@ -183,7 +182,7 @@ class RepositoryImpl(
         var photo: String? = null
         val userDataDoc = fireStoreDB.collection(USERS).document(uid).get().await()
 
-        if (!userDataDoc.getString("photo").isNullOrEmptyOrBlank)
+        if (userDataDoc.getBoolean("photo") == false)
             storage.child("profile_pics/$uid").downloadUrl
                 .addOnSuccessListener {
                     photo = it.toString()
@@ -207,6 +206,8 @@ class RepositoryImpl(
         val fileRef = storage.child("profile_pics/$storageName")
         fileRef.putFile(request.uri).await()
 
+        fireStoreDB.collection(USERS).document(user.uid)
+            .update(mutableMapOf<String, Any>("photo" to true)).await()
         return ResultWrapper.Success(true)
     }
 
