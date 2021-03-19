@@ -1,5 +1,6 @@
 package gr.ppzglou.food.framework
 
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
@@ -12,9 +13,12 @@ import gr.ppzglou.food.data.SetupRepository
 import gr.ppzglou.food.data.models.*
 import gr.ppzglou.food.ext.BaseException
 import gr.ppzglou.food.ext.handleApiFormat
+import gr.ppzglou.food.ext.isNullOrEmptyOrBlank
 import gr.ppzglou.food.ext.networkCall
 import gr.ppzglou.food.util.ResultWrapper
 import kotlinx.coroutines.tasks.await
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class RepositoryImpl(
@@ -26,6 +30,7 @@ class RepositoryImpl(
 ) : SetupRepository {
 
     private val USERS = "users"
+    private val DELETED_USERS = "deleted_users"
 
     override suspend fun searchRecipeRemote(request: SearchRequest): ResultWrapper<SearchResponse> =
         networkCall {
@@ -97,9 +102,13 @@ class RepositoryImpl(
         if (request.fname == null || request.sname == null) throw BaseException(ERROR_GENERAL)
 
         val user = firebaseAuth.currentUser ?: throw BaseException(ERROR_GENERAL)
-        val personalHash: MutableMap<String, Any> = HashMap()
-        personalHash["photo"] = ""
-        fireStoreDB.collection(USERS).document(user.uid).set(personalHash).await()
+
+        val hash = hashMapOf(
+            "name" to request.fname,
+            "sname" to request.sname,
+            "photo" to ""
+        )
+        fireStoreDB.collection(USERS).document(user.uid).set(hash).await()
 
         return ResultWrapper.Success(true)
     }
@@ -172,10 +181,13 @@ class RepositoryImpl(
     override suspend fun userProfileRemote(): ResultWrapper<UserProfileResponse> {
         val uid = firebaseAuth.currentUser?.uid ?: throw BaseException(ERROR_GENERAL)
         var photo: String? = null
-        storage.child("profile_pics/$uid").downloadUrl
-            .addOnSuccessListener {
-                photo = it.toString()
-            }.await()
+        val userDataDoc = fireStoreDB.collection(USERS).document(uid).get().await()
+
+        if (!userDataDoc.getString("photo").isNullOrEmptyOrBlank)
+            storage.child("profile_pics/$uid").downloadUrl
+                .addOnSuccessListener {
+                    photo = it.toString()
+                }.await()
 
         val userProfile = UserProfileResponse(
             name = firebaseAuth.currentUser?.displayName,
@@ -206,7 +218,7 @@ class RepositoryImpl(
 
         val userDetails = PersonalDetailsModel(
             name = userDataDoc.getString("name"),
-            sname = userDataDoc.getString("last_name")
+            sname = userDataDoc.getString("sname")
         )
         return ResultWrapper.Success(userDetails)
     }
@@ -216,14 +228,36 @@ class RepositoryImpl(
             throw BaseException(ERROR_GENERAL)
 
         val user = firebaseAuth.currentUser ?: throw BaseException(ERROR_GENERAL)
+
         val name = request.name.replace("\\s".toRegex(), "")
         val sname = request.sname.replace("\\s".toRegex(), "")
-        val userHash: MutableMap<String, Any> = HashMap()
-        userHash["name"] = name
-        userHash["last_name"] = sname
+        val hash = hashMapOf<String, Any>(
+            "name" to name,
+            "sname" to sname
+        )
 
-        fireStoreDB.collection(USERS).document(user.uid).update(userHash).await()
+        fireStoreDB.collection(USERS).document(user.uid).update(hash).await()
         updateDisplayNameRemote(UpdateDisplayNameRequest("$name $sname"))
+
+        return ResultWrapper.Success(true)
+    }
+
+    override suspend fun deleteAccountRemote(request: DeleteAccountRequest): ResultWrapper<Boolean> {
+        val user = firebaseAuth.currentUser ?: throw BaseException(ERROR_GENERAL)
+        if (request.password == null || request.description == null) throw BaseException(
+            ERROR_GENERAL
+        )
+
+        val userHash: MutableMap<String, Any> = HashMap()
+        userHash["name"] = user.displayName!!
+        userHash["email"] = user.email.toString()
+        userHash["deleted_at"] = Timestamp(Date(System.currentTimeMillis()))
+        userHash["description"] = request.description
+
+        loginRemote(LoginRequest(user.email, request.password))
+        fireStoreDB.collection(DELETED_USERS).document(user.uid).set(userHash).await()
+        fireStoreDB.collection(USERS).document(user.uid).delete().await()
+        user.delete().await()
 
         return ResultWrapper.Success(true)
     }

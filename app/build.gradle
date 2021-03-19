@@ -49,17 +49,17 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file('keystore/food.jks')
+            storeFile file('keystore/food.keystore')
             keyAlias 'food'
             storePassword 'xC45$j^KJs75@'
             keyPassword 'xC45$j^KJs75@'
         }
-      /*  release {
-            storeFile file('keystore/food.jks')
+        release {
+            storeFile file('keystore/food.keystore')
             keyAlias 'food'
             storePassword 'xC45$j^KJs75@'
             keyPassword 'xC45$j^KJs75@'
-        }*/
+        }
     }
 
     flavorDimensions "status"
@@ -70,11 +70,11 @@ android {
             buildConfigField 'String', 'API_BASE_URL', '"https://api.edamam.com/"'
             signingConfig signingConfigs.debug
         }
-       /* live {
+        live {
             dimension "status"
             buildConfigField 'String', 'API_BASE_URL', '"https://api.edamam.com/"'
             signingConfig signingConfigs.release
-        }*/
+        }
     }
 
     repositories {

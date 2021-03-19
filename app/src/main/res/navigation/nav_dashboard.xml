@@ -20,12 +20,15 @@
         <action
             android:id="@+id/action_nav_profile_to_nav_fav"
             app:destination="@id/nav_fav" />
+        <action
+            android:id="@+id/action_nav_profile_to_nav_bmr"
+            app:destination="@id/nav_bmr" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_settings"
         android:name="gr.ppzglou.food.ui.dashboard.fragments.settings.SettingsFragment"
-        android:label="@string/menu_settings"
+        android:label="Settings"
         tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_nav_settings_to_nav_pass_settings"
@@ -47,6 +50,12 @@
             android:id="@+id/action_nav_search_to_nav_recipe"
             app:destination="@id/nav_recipe" />
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_bmr"
+        android:name="gr.ppzglou.food.ui.dashboard.fragments.BmrFragment"
+        android:label="Bmr"
+        tools:layout="@layout/fragment_bmr"></fragment>
 
     <fragment
         android:id="@+id/nav_fav"

@@ -25,15 +25,20 @@ class StepperPersonalInfoFragment : BaseFragment<FragmentStepperPersonalInfoBind
         }
     }
 
+    override fun setupViews() {
+        viewModel.getName()
+    }
+
     override fun setupListeners() {
         with(binding) {
-            next.setOnClickListener {
+            finishBtn.setOnClickListener {
                 if (validate()) {
                     viewModel.setName(
                         name.editText?.text.toString(),
                         sname.editText?.text.toString()
                     )
                 }
+                activity?.finish()
             }
             back.setOnClickListener {
                 findNavController().safeNavigateOnBack(
@@ -42,10 +47,6 @@ class StepperPersonalInfoFragment : BaseFragment<FragmentStepperPersonalInfoBind
                 )
             }
         }
-    }
-
-    override fun setupViews() {
-        viewModel.getName()
     }
 
     private fun setDataToViews(personalDetailsModel: PersonalDetailsModel) {

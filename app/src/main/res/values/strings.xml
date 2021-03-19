@@ -3,37 +3,34 @@
     <string name="empty"> </string>
 
     <!--Menu-->
-    <string name="menu_profile">Προφιλ</string>
-    <string name="menu_files">Αρχεια</string>
-    <string name="menu_requests">Αιτήσεις</string>
-    <string name="menu_settings">Ρυθμίσεις</string>
+    <string name="menu_profile">Profile</string>
 
     <!--Intro-->
-    <string name="intro_login_txt">Συνδέσου ή δημιούργησε ένα νέο λογαρισμό</string>
-    <string name="intro_login_or">ή</string>
-    <string name="intro_login_btn">Σύνδεση</string>
-    <string name="intro_register_btn">Εγγραφή</string>
+    <string name="intro_login_txt">Login or create a new account</string>
+    <string name="intro_login_or">or</string>
+    <string name="intro_login_btn">Login</string>
+    <string name="intro_register_btn">Sign up</string>
 
     <!--Login-->
-    <string name="login_title">Σύνδεση χρήστη</string>
+    <string name="login_title">Login</string>
     <string name="login_email">email</string>
     <string name="login_password">password</string>
-    <string name="login_forgot_pass_btn">Ξέχασα τον κωδικό μου</string>
-    <string name="login_resend_email">νέα αποστολή email</string>
-    <string name="login_login_btn">Σύνδεση</string>
+    <string name="login_forgot_pass_btn">Forgot my password</string>
+    <string name="login_resend_email">resend email</string>
+    <string name="login_login_btn">Login</string>
 
     <!--ForgotPass-->
-    <string name="forgot_pass_title">Επαναφορά κωδικού πρόσβασης</string>
+    <string name="forgot_pass_title">Reset password</string>
     <string name="forgot_pass_email">email</string>
-    <string name="forgot_pass_reset_btn">Επαναφορά κωδικού</string>
+    <string name="forgot_pass_reset_btn">Reset</string>
 
     <!--Register-->
-    <string name="reg_title">Εγγραφή νέου μέλους</string>
-    <string name="reg_fname">όνομα</string>
-    <string name="reg_sname">επώνυμο</string>
+    <string name="reg_title">Sign Up</string>
+    <string name="reg_fname">first name</string>
+    <string name="reg_sname">last name</string>
     <string name="reg_email">email</string>
     <string name="reg_password">password</string>
-    <string name="reg_reg_btn">Εγγραφή</string>
+    <string name="reg_reg_btn">Sign up</string>
 
     <!--PinSetup-->
     <string name="pin_setup_title1">Καθορισμός 4ψήφιου κωδικού PIN</string>
@@ -109,17 +106,9 @@
     <string name="error_password">Απο 8 έως 16 χαρακτήρες, τουλάχιστον 1 γράμμα, 1 νούμερο και 1 ειδικό χαρακτήρα (@ # $ % ^ &#38; + =)</string>
     <string name="error_phone">Λανθασμένη μορφή αριθμού</string>
     <string name="error_otp">Μη έγκυρος κωδικός. Ο κωδικός πρέπει να έχει 6 ψηφία</string>
-    <string name="error_post_code">Ο Τ.Κ. πρέπει να έχει 5 ψηφία</string>
-    <string name="error_afm_digits">Το ΑΦΜ πρέπει να έχει 9 ψηφία</string>
-    <string name="error_afm">Μη έγκυρο ΑΦΜ</string>
-    <string name="error_amka">Το ΑΜΚΑ πρέπει να έχει 11 ψηφία</string>
     <string name="error_pin">Το PIN πρέπει να έχει 4 ψηφία</string>
-    <string name="error_year">Το έτος δεν είναι έγκυρο</string>
     <string name="error_not_same_pass">Οι κωδικοί δε ταιριάζουν</string>
     <string name="error_not_same_pin">Τα PIN δε ταιριάζουν</string>
     <string name="error_not_same_email">Τα email δε ταιριάζουν</string>
-    <string name="error_not_valid_time">Μη έγκυρη ώρα</string>
-    <string name="error_not_valid_day">Μη έγκυρη ημερομινία</string>
-
 
 </resources>

@@ -50,5 +50,7 @@ interface SetupDataSource {
 
     suspend fun setPersonalDetails(request: PersonalDetailsModel): ResultWrapper<Boolean>
 
+    suspend fun deleteAccount(request: DeleteAccountRequest): ResultWrapper<Boolean>
+
 
 }

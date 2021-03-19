@@ -1,5 +1,6 @@
 package gr.ppzglou.food.ui.dashboard.fragments.settings
 
+import android.content.Intent
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -8,7 +9,10 @@ import gr.ppzglou.food.R
 import gr.ppzglou.food.base.BaseFragment
 import gr.ppzglou.food.databinding.FragmentDeleteAccountBinding
 import gr.ppzglou.food.ext.changeButtonEnable
+import gr.ppzglou.food.ext.foodToast
+import gr.ppzglou.food.ext.isNotEmpty
 import gr.ppzglou.food.ui.dashboard.DashboardViewModel
+import gr.ppzglou.food.ui.landing.LandingActivity
 
 
 class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
@@ -22,7 +26,7 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
 
     override fun setupListeners() {
         with(binding) {
-            /*deleteBtn.setOnClickListener {
+            deleteBtn.setOnClickListener {
                 if (radio6.isChecked) {
                     if (description.isNotEmpty() && password.isNotEmpty()) {
 
@@ -30,7 +34,7 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
                     }
                 } else if (isChecked() && password.isNotEmpty())
                     viewModel.delete(password.editText?.text.toString(), deleteDescription)
-            }*/
+            }
             radio1.setOnClickListener { radioListener(radio1) }
             radio2.setOnClickListener { radioListener(radio2) }
             radio3.setOnClickListener { radioListener(radio3) }
@@ -44,12 +48,12 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>() {
     }
 
     override fun setupObservers() {
-        /* viewModel.successDeleted.observe(viewLifecycleOwner) {
-             activity?.foodToast("epitixis diagrafi")
-             val intent = Intent(context, LandingActivity::class.java)
-             startActivity(intent)
-             activity?.finish()
-         }*/
+        viewModel.successDeleted.observe(viewLifecycleOwner) {
+            activity?.foodToast("epitixis diagrafi")
+            val intent = Intent(context, LandingActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
+        }
     }
 
     override fun setupViews() {

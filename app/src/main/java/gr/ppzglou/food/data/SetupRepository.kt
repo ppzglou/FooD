@@ -49,5 +49,7 @@ interface SetupRepository {
 
     suspend fun setPersonalDetailsRemote(request: PersonalDetailsModel): ResultWrapper<Boolean>
 
+    suspend fun deleteAccountRemote(request: DeleteAccountRequest): ResultWrapper<Boolean>
+
 
 }

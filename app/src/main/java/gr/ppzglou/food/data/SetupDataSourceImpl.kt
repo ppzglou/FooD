@@ -72,4 +72,7 @@ class SetupDataSourceImpl(
     override suspend fun setPersonalDetails(request: PersonalDetailsModel): ResultWrapper<Boolean> =
         repository.setPersonalDetailsRemote(request)
 
+    override suspend fun deleteAccount(request: DeleteAccountRequest) =
+        repository.deleteAccountRemote(request)
+
 }

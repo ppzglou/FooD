@@ -12,10 +12,7 @@ import gr.ppzglou.food.dao.fav.FavDaoImpl
 import gr.ppzglou.food.dao.fav.FavEntity
 import gr.ppzglou.food.dao.userpin.UserPinDaoImpl
 import gr.ppzglou.food.dao.userpin.UserPinEntity
-import gr.ppzglou.food.data.models.UpdateEmailRequest
-import gr.ppzglou.food.data.models.UpdatePassRequest
-import gr.ppzglou.food.data.models.UploadFileRequest
-import gr.ppzglou.food.data.models.UserProfileResponse
+import gr.ppzglou.food.data.models.*
 import gr.ppzglou.food.ext.isNullOrEmptyOrBlank
 import gr.ppzglou.food.framework.Hits
 import gr.ppzglou.food.framework.Recipe
@@ -41,6 +38,7 @@ constructor(
     private val favDaoImpl: FavDaoImpl,
     private val uploadFileUseCase: UploadFileUseCase,
     private val authUseCase: AuthUseCase,
+    private val deleteAccountUseCase: DeleteAccountUseCase
 ) : BaseViewModel(connectivityLiveData, connectivityManager) {
 
     private val DELAY = 10
@@ -86,7 +84,7 @@ constructor(
     private val _daoUserPin = MutableLiveData<Boolean>()
     val fetchDaoUserPin: LiveData<Boolean> = _daoUserPin
 
-    private val _successPinChanged = MutableLiveData<Boolean>()
+    private val _successPinChanged = SingleLiveEvent<Boolean>()
     val successPinChanged: LiveData<Boolean> = _successPinChanged
 
     private val _daoIsFav = MutableLiveData<Boolean>()
@@ -100,6 +98,12 @@ constructor(
 
     private val _successFetchFavs = MutableLiveData<MutableList<String>>()
     val successFetchFavs: LiveData<MutableList<String>> = _successFetchFavs
+
+    private val _successDeleted = MutableLiveData<Boolean>()
+    val successDeleted: LiveData<Boolean> = _successDeleted
+
+    private val _successCalcBmr = MutableLiveData<BmrModel>()
+    val successCalcBmr: LiveData<BmrModel> = _successCalcBmr
 
     fun getMenu(): MutableList<MenuButton> {
         val nav = ProfileFragmentDirections
@@ -118,6 +122,11 @@ constructor(
                 "settings",
                 R.drawable.ic_heart,
                 nav.actionNavProfileToNavFav()
+            ),
+            MenuButton(
+                "BMR",
+                R.drawable.ic_bmr,
+                nav.actionNavProfileToNavBmr()
             )
         )
     }
@@ -273,7 +282,7 @@ constructor(
         launch(DELAY) {
             when (val response = authUseCase(pass)) {
                 is ResultWrapper.Success -> {
-                    _successAuth.value = response.data
+                    _successAuth.value = response.data!!
                 }
             }
         }
@@ -358,6 +367,46 @@ constructor(
                 }
             }
             _successFetchFavs.value = favsCurrentUser
+        }
+    }
+
+    fun calcBMR(sex: Int, height: Int, weight: Double, age: Int, activity: Int) {
+        val bmr = when (sex) {
+            0 -> 66f + 13.7 * weight.toFloat() + 5f * height.toFloat() - 6.8 * age.toFloat()
+            else -> 655f + 9.6 * weight.toFloat() + 1.8 * height.toFloat() - 4.7 * age.toFloat()
+        }
+        val daily = when (activity) {
+            0 -> bmr / 0.83
+            1 -> bmr / 0.72
+            2 -> bmr / 0.64
+            3 -> bmr / 0.57
+            else -> bmr / 0.52
+        }
+        _successCalcBmr.value = BmrModel(String.format("%.1f", bmr), String.format("%.1f", daily))
+    }
+
+    fun delete(password: String, deleteDescription: String) {
+        launch(DELAY) {
+            if (!currentUser.isNullOrEmptyOrBlank) {
+                when (val response =
+                    deleteAccountUseCase(
+                        DeleteAccountRequest(
+                            password,
+                            deleteDescription
+                        )
+                    )) {
+                    is ResultWrapper.Success -> {
+                        val users = userPinDaoImpl.getAll()
+                        for (u in users) {
+                            if (u.uid == currentUser) {
+                                userPinDaoImpl.delete(u)
+                            }
+                        }
+                        sharedPrefs[AUTH_UUID] = null
+                        _successDeleted.value = true
+                    }
+                }
+            }
         }
     }
 
