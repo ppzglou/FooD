@@ -181,8 +181,9 @@ class RepositoryImpl(
         val uid = firebaseAuth.currentUser?.uid ?: throw BaseException(ERROR_GENERAL)
         var photo: String? = null
         val userDataDoc = fireStoreDB.collection(USERS).document(uid).get().await()
+        val havPhoto = userDataDoc.getBoolean("photo") ?: false
 
-        if (userDataDoc.getBoolean("photo") == false)
+        if (havPhoto)
             storage.child("profile_pics/$uid").downloadUrl
                 .addOnSuccessListener {
                     photo = it.toString()
